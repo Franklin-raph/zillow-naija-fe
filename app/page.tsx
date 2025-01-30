@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "./components/nav-bar/Navbar";
-import { BiKey, BiSearch } from "react-icons/bi";
+import { BiChevronDown, BiKey, BiSearch } from "react-icons/bi";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -20,6 +20,9 @@ import { CiLocationOn } from "react-icons/ci";
 import { GrMapLocation } from "react-icons/gr";
 import { FaAward, FaRegSmile } from "react-icons/fa";
 import { RiKey2Line } from "react-icons/ri";
+import HomeStatsCounter from "./components/home-stats-counter/HomeStatsCounter";
+import { HiChevronDown, HiChevronUp, HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+
 
 export default function Home() {
   const tabs = ["Buy", "Rent", "Sell"];
@@ -77,46 +80,11 @@ export default function Home() {
     },
   ];
 
-  interface StatItem {
-    value: number;
-    label: string;
-  }
-
-  const stats: StatItem[] = [
-    { value: 1200, label: 'Properties Sold' },
-    { value: 1200, label: 'Happy Customer' },
-    { value: 1200, label: 'Awards Won' },
-  ];
-
-  const [counts, setCounts] = useState<number[]>(stats.map(() => 0));
-
-  useEffect(() => {
-    const duration = 2000; // Animation duration in milliseconds
-    const increment = 10; // Time between increments in milliseconds
-
-    stats.forEach((stat, index) => {
-      const targetValue = stat.value;
-      const steps = Math.ceil(duration / increment);
-      const incrementValue = targetValue / steps;
-
-      let currentStep = 0;
-      const interval = setInterval(() => {
-        currentStep++;
-        setCounts((prevCounts) => {
-          const newCounts = [...prevCounts];
-          newCounts[index] = Math.min(
-            Math.ceil(incrementValue * currentStep),
-            targetValue
-          );
-          return newCounts;
-        });
-
-        if (currentStep >= steps) {
-          clearInterval(interval);
-        }
-      }, increment);
-    });
-  }, []);
+  const [aboutSection, setAboutSection] = useState({
+    first: true,
+    second: true,
+    third: true,
+  })
 
   return (
     <div>
@@ -151,29 +119,7 @@ export default function Home() {
             />
             <button className="bg-white text-[#212121] px-5 py-[10px] rounded-[5px]">Search</button>
           </div>
-          {/* {stats.map((stat, index) => (
-        <div key={index} className="text-center">
-          <span className="text-4xl font-bold">{counts[index]}+</span>
-          <p className="text-lg mt-2">{stat.label}</p>
-        </div>
-      ))} */}
-          <div className="flex items-center justify-between mt-5">
-            <div className="text-center flex items-center flex-col">
-              <RiKey2Line className="text-[40px]"/>
-              <p className="text-[25px] my-[-10px]">1,200 +</p>
-              <p className="mt-2">Properties Sold</p>
-            </div>
-            <div className="text-center flex items-center flex-col">
-              <FaRegSmile className="text-[30px] mb-[2px]"/>
-              <p className="text-[25px] my-[-10px]">1,200 +</p>
-              <p className="mt-2">Happy Customer</p>
-            </div>
-            <div className="text-center flex items-center flex-col">
-              <FaAward className="text-[30px] mb-[2px]"/>
-              <p className="text-[25px] my-[-10px]">1,200 +</p>
-              <p className="mt-2">Awards Won</p>
-            </div>
-          </div>
+          <HomeStatsCounter />
         </div>
         
         <div className="md:w-[50%] w-full h-[400px] md:h-[500px] overflow-hidden bottom-[-110px] relative">
@@ -279,6 +225,78 @@ export default function Home() {
             </SwiperSlide>
           ))}
         </Swiper>
+      </section>
+
+      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[80px] flex items-start ">
+        <img src="./images/sold.png" alt="" className="w-[50%] h-[500px] object-cover rounded-[10px]" />
+        <div className="w-[50%] ml-[50px] grid grid-cols-1 gap-5">
+          <div className="border-2 rounded-t-[7px]">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, first: !aboutSection.first})}>
+              <div className="flex items-center gap-4">
+                <img src="./images/buy.svg" alt="" className="w-[35px]" />
+                <p>Buy a home</p>
+              </div>
+              {
+                aboutSection.first ? <HiOutlineChevronDown className="text-[20px]"/> : <HiOutlineChevronUp className="text-[20px]"/>
+              }
+            </div>
+            {
+              aboutSection.first && (
+                <div className="mt-5 py-[8px] px-5">
+                  <p>Discover the perfect home that fits your style and budget. With verified listings and expert support, we make buying a home stress free.</p>
+                </div>
+              )
+            }
+          </div>
+          <div className="my-4 border-2 rounded-t-[7px]">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, second: !aboutSection.second})}>
+              <div className="flex items-center gap-4">
+                <img src="./images/sell.svg" alt="" className="w-[35px]" />
+                <p>Sell a home</p>
+              </div>
+              {
+                aboutSection.second ? <HiOutlineChevronDown className="text-[20px]"/> : <HiOutlineChevronUp className="text-[20px]"/>
+              }
+            </div>
+            {
+              aboutSection.second && (
+                <div className="mt-5 py-[8px] px-5">
+                  <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we'll work with you to find the best price and buyer.</p>
+                </div>
+              )
+            }
+          </div>
+          <div className="border-2 rounded-t-[7px]">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, third: !aboutSection.third})}>
+              <div className="flex items-center gap-4">
+                <img src="./images/rent.svg" alt="" className="w-[35px]" />
+                <p>Rent a home</p>
+              </div>
+              {
+                aboutSection.third ? <HiOutlineChevronDown className="text-[20px]"/> : <HiOutlineChevronUp className="text-[20px]"/>
+              }
+            </div>
+            {
+              aboutSection.third && (
+                <div className="mt-5 py-[8px] px-5">
+                  <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We've got you covered at Zillow9ja.</p>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </section>
+      <div className="text-center">
+        <div className="flex items-center justify-center mt-20">
+          <img src="./images/user1.png" alt="" className="w-[70px]"/>
+          <img src="./images/user2.png" alt="" className="w-[70px] ml-[-10px]"/>
+          <img src="./images/user3.png" alt="" className="w-[70px] ml-[-10px]"/>
+        </div>
+        <p className="text-[20px] font-[600] mt-3">Trusted by over <span className="text-[#2E8B57]">1,000</span> users all over Nigeria</p>
+      </div>
+
+      <section id="why-choose-us-section">
+
       </section>
     </div>
   );
