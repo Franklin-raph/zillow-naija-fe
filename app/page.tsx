@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "./components/nav-bar/Navbar";
-import { BiChevronDown, BiKey, BiSearch } from "react-icons/bi";
+import { BiChevronDown, BiHomeHeart, BiKey, BiSearch } from "react-icons/bi";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -14,7 +14,7 @@ import 'swiper/css/effect-fade';
 import { Pagination, Autoplay } from 'swiper/modules';
 import SuggestedHomeCard from "./components/suggested-home-card/SuggestedHomeCard";
 import { IoArrowForwardOutline } from "react-icons/io5";
-import { GoArrowRight } from "react-icons/go";
+import { GoArrowRight, GoTasklist } from "react-icons/go";
 import RecentlyPostedHomeCards from "./components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import { CiLocationOn } from "react-icons/ci";
 import { GrMapLocation } from "react-icons/gr";
@@ -22,6 +22,9 @@ import { FaAward, FaRegSmile } from "react-icons/fa";
 import { RiKey2Line } from "react-icons/ri";
 import HomeStatsCounter from "./components/home-stats-counter/HomeStatsCounter";
 import { HiChevronDown, HiChevronUp, HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+import { PiSelectionPlusThin } from "react-icons/pi";
+import { LiaHandPointerSolid } from "react-icons/lia";
+import TestimonialSwiper from "./components/testimonial-component/TestimonialComponent";
 
 
 export default function Home() {
@@ -34,6 +37,7 @@ export default function Home() {
       location: 'Adeniran Ogunsanya Surulere, Lagos',
       price: '#3,500,000',
       tag: '5 mins Ago',
+      image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -41,6 +45,7 @@ export default function Home() {
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
       price: '#3,500,000',
       tag: '10 mins Ago',
+      image: "./images/suggested-image-2.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -48,6 +53,7 @@ export default function Home() {
       location: 'Independence Layout Nza, Enugu',
       price: '#3,500,000',
       tag: '8 mins Ago',
+      image: "./images/suggested-image-3.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -55,6 +61,7 @@ export default function Home() {
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
       price: '#3,500,000',
       tag: '5 mins Ago',
+      image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -62,6 +69,7 @@ export default function Home() {
       location: 'Independence Layout Nza, Enugu',
       price: '#3,500,000',
       tag: '25 mins Ago',
+      image: "./images/suggested-image-2.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -69,6 +77,7 @@ export default function Home() {
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
       price: '#3,500,000',
       tag: 'Yesterday',
+      image: "./images/suggested-image-3.png",
       details: ['38eds', '28abrooms', '5z7n²'],
     },
     {
@@ -76,7 +85,23 @@ export default function Home() {
       location: 'Independence Layout Nza, Enugu',
       price: '#3,500,000',
       tag: 'Last week',
+      image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
+    },
+  ];
+
+  const testimonials = [
+    {
+      text: "I recently relocated to Port Harcourt and had no idea where to start. Their site helped me narrow down options based on my budget and preferences.",
+      author: "Chioma E., Port Harcourt",
+    },
+    {
+      text: "Zillow9ja made my house hunt stress-free. I was honestly tired of visiting places that didn’t match the pictures, but what I saw online was exactly what I got. The agent I worked with was professional and patient.",
+      author: "Amaka I., Lagos",
+    },
+    {
+      text: "I listed my apartment on Zillow9ja, and within a week, I had serious tenants reaching out. What stood out for me was how smooth and straightforward the entire process was. It saved me so much time.",
+      author: "Bayo A., Abuja",
     },
   ];
 
@@ -89,7 +114,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <section className='flex md:justify-between items-start flex-col md:flex-row pt-[3rem] relative max-w-[1600px] mx-auto px-[4rem] gap-5 bg-[#EEF1EE]'>
+      <section className='flex md:justify-between items-start flex-col md:flex-row pt-[3rem] relative max-w-[1600px] mx-auto px-[4rem] gap-5 bg-[#F5F6F7]'>
         <div className='py-14 md:pb-0 md:pt-[6rem] lg:w-[45%] md:w-[70%] w-[98%] relative bottom-[20px]'>
           <p className="lg:text-[50px] md:text-[40px] text-[30px] font-[700] text-center md:text-left leading-[65px] mb-5">
             Buy, Lease, rent, or sell your property easily with Zillow9ja
@@ -227,7 +252,7 @@ export default function Home() {
         </Swiper>
       </section>
 
-      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[80px] flex items-start ">
+      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[80px] flex items-start">
         <img src="./images/sold.png" alt="" className="w-[50%] h-[500px] object-cover rounded-[10px]" />
         <div className="w-[50%] ml-[50px] grid grid-cols-1 gap-5">
           <div className="border-2 rounded-t-[7px]">
@@ -295,8 +320,66 @@ export default function Home() {
         <p className="text-[20px] font-[600] mt-3">Trusted by over <span className="text-[#2E8B57]">1,000</span> users all over Nigeria</p>
       </div>
 
-      <section id="why-choose-us-section">
+      <section id="why-choose-us-section" className="relative mt-[80px]">
+        <div className="absolute bg-black bg-opacity-70 h-full w-full top-0 z-[1]"></div>
+        <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] px-[0px] pt-[0px]">
+          <p className="font-[800] text-[40px]">Why Choose Us</p>
+          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        <div className="relative z-[2] md:max-w-[1600px] w-[95%] md:px-[4rem] pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
+          <div className="flex items-center gap-5">
+            <div className="text-[30px] bg-white p-[10px] text-[#2E8B57] rounded-full">
+              <PiSelectionPlusThin />
+            </div>
+            <div>
+              <p className="font-[700] mb-2">Wide Property Selection</p>
+              <p>Explore thousands of listings tailored to your needs, from budget-friendly apartments to luxury homes, all in one place.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-5">
+            <div className="text-[30px] bg-white p-[10px] text-[#2E8B57] rounded-full">
+              <GoTasklist />
+            </div>
+            <div>
+              <p className="font-[700] mb-2">Verified Listings</p>
+              <p>Enjoy peace of mind with properties verified for accuracy and authenticity, ensuring a safe and secure transaction process.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-5">
+            <div className="text-[30px] bg-white p-[10px] text-[#2E8B57] rounded-full">
+              <LiaHandPointerSolid />
+            </div>
+            <div>
+              <p className="font-[700] mb-2">User-Friendly Interface</p>
+              <p>Our intuitive platform makes searching, comparing, and contacting property owners or agents seamless and hassle-free.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-5">
+            <div className="text-[30px] bg-white p-[10px] text-[#2E8B57] rounded-full">
+              <BiHomeHeart />
+            </div>
+            <div>
+              <p className="font-[700] mb-2">Find your future home</p>
+              <p>We help you find a new home by offering a smart real estate.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section className="bg-[#F5F6F7] py-[9rem]">
+        <div className="text-center mb-8">
+          <p className="text-[#212121] font-bold text-[30px]">Don't take our words for it!</p>
+          <p>See what some of our users has to say about Zillow9ja</p>
+        </div>
+        <TestimonialSwiper />
+      </section>
+
+      <section className="bg-[#165751] py-[6rem]">
+        <div className="text-center mb-8 text-white">
+          <p className="text-[18px] text-center mb-1">Get Started with Zillow9ja</p>
+          <p className="text-[35px] w-[700px] font-bold mx-auto">Looking for a place to call home or ready  to sell one?  Zillow9ja makes it easy!</p>
+          <button className="py-[15px] px-[25px] text-[#2E8B57] bg-[#fff] mt-7 rounded-[8px] font-[500]">Get started for free</button>
+        </div>
       </section>
     </div>
   );

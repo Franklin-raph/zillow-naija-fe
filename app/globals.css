@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.swiper-pagination {
-    position: relative;
-    margin-top: 20px; /* Adjust this value to move the pagination down */
+#why-choose-us-section{
+    background-image: url('/images/why-choose-us.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+    background-attachment: fixed;
 }

@@ -7,6 +7,7 @@ interface Property {
     location: string;
     price: string;
     tag: string;
+    image: string;
     details: string[];
   }
   
@@ -18,7 +19,7 @@ export default function RecentlyPostedHomeCards({ property }: PropertyCardProps)
   return (
     <div className='mb-5 shadow-md rounded-[20px] relative cursor-pointer'>
         <p className='absolute bg-[#212121] text-white md:top-[40px] top-[20px] px-3 py-1 md:text-[14px] text-[12px] rounded-r-[5px]'>{property.tag}</p>
-        <img src="./images/suggested-image-3.png" alt="" className='md:h-[250px] h-[150px]  object-cover w-full rounded-t-[20px]'/>
+        <img src={property.image} alt="" className='md:h-[250px] h-[150px]  object-cover w-full rounded-t-[20px]'/>
         <div className='p-4'>
             <p className='font-[600] md:text-[18px] text-[14px]'>{property.title}</p>
             <p className='text-[14px] mt-1 mb-3'>{property.location}</p>
