@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-pagination {
+    position: relative;
+    margin-top: 20px; /* Adjust this value to move the pagination down */
+}
