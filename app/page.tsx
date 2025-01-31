@@ -13,18 +13,22 @@ import 'swiper/css/effect-fade';
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
 import SuggestedHomeCard from "./components/suggested-home-card/SuggestedHomeCard";
-import { IoArrowForwardOutline } from "react-icons/io5";
+import { IoArrowForwardOutline, IoChatboxEllipsesOutline, IoLocationOutline, IoVideocamOutline } from "react-icons/io5";
 import { GoArrowRight, GoTasklist } from "react-icons/go";
 import RecentlyPostedHomeCards from "./components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import { CiLocationOn } from "react-icons/ci";
 import { GrMapLocation } from "react-icons/gr";
-import { FaAward, FaRegSmile } from "react-icons/fa";
+import { FaAward, FaPlus, FaRegSmile } from "react-icons/fa";
 import { RiKey2Line } from "react-icons/ri";
 import HomeStatsCounter from "./components/home-stats-counter/HomeStatsCounter";
 import { HiChevronDown, HiChevronUp, HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
-import { PiSelectionPlusThin } from "react-icons/pi";
+import { PiPhoneCall, PiSelectionPlusThin } from "react-icons/pi";
 import { LiaHandPointerSolid } from "react-icons/lia";
 import TestimonialSwiper from "./components/testimonial-component/TestimonialComponent";
+import { RxMinus, RxPlus } from "react-icons/rx";
+import Image from "next/image";
+import { FaRegMessage } from "react-icons/fa6";
+import { IoIosSend } from "react-icons/io";
 
 
 export default function Home() {
@@ -110,6 +114,59 @@ export default function Home() {
     second: true,
     third: true,
   })
+
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const faqItems = [
+    {
+      question: 'Is there a fee for using Zillow9ja?',
+      answer: 'Zillow9ja is free to use for property seekers. There may be fees associated with listing a property, depending on the type of listing or services you require.',
+    },
+    {
+      question: 'What is Next.js?',
+      answer: 'Next.js is a React framework that enables functionality such as server-side rendering and generating static websites.',
+    },
+    {
+      question: 'What is Tailwind CSS?',
+      answer: 'Tailwind CSS is a utility-first CSS framework for rapidly building custom user interfaces.',
+    },
+    {
+      question: 'How do I use TypeScript with Next.js?',
+      answer: 'You can create a Next.js project with TypeScript by using the `--typescript` flag when setting up your project.',
+    },
+  ];
+
+  const toggleAnswer = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const contactMethods = [
+    {
+      title: 'Call',
+      number: '08139362969',
+      icon: <PiPhoneCall />
+    },
+    {
+      title: 'Chat',
+      number: '08139362969',
+      icon: <IoChatboxEllipsesOutline />
+    },
+    {
+      title: 'Video Call',
+      number: '08139362969',
+      icon: <IoVideocamOutline />
+    },
+    {
+      title: 'Message',
+      number: '08139362969',
+      icon: <FaRegMessage />
+    }
+  ];
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    // Handle newsletter submission
+  };
 
   return (
     <div>
@@ -314,19 +371,19 @@ export default function Home() {
       <div className="text-center">
         <div className="flex items-center justify-center mt-20">
           <img src="./images/user1.png" alt="" className="w-[70px]"/>
-          <img src="./images/user2.png" alt="" className="w-[70px] ml-[-10px]"/>
-          <img src="./images/user3.png" alt="" className="w-[70px] ml-[-10px]"/>
+          <img src="./images/user2.png" alt="" className="w-[70px] border-2 rounded-full ml-[-10px]"/>
+          <img src="./images/user3.png" alt="" className="w-[70px] border-2 rounded-full ml-[-10px]"/>
         </div>
         <p className="text-[20px] font-[600] mt-3">Trusted by over <span className="text-[#2E8B57]">1,000</span> users all over Nigeria</p>
       </div>
 
       <section id="why-choose-us-section" className="relative mt-[80px]">
         <div className="absolute bg-black bg-opacity-70 h-full w-full top-0 z-[1]"></div>
-        <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] px-[0px] pt-[0px]">
+        <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] ml-[2.5rem] pt-[0px]">
           <p className="font-[800] text-[40px]">Why Choose Us</p>
           <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         </div>
-        <div className="relative z-[2] md:max-w-[1600px] w-[95%] md:px-[4rem] pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
+        <div className="relative z-[2] md:max-w-[1600px] mx-auto w-[95%] md:px-[4rem] pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
           <div className="flex items-center gap-5">
             <div className="text-[30px] bg-white p-[10px] text-[#2E8B57] rounded-full">
               <PiSelectionPlusThin />
@@ -381,6 +438,142 @@ export default function Home() {
           <button className="py-[15px] px-[25px] text-[#2E8B57] bg-[#fff] mt-7 rounded-[8px] font-[500]">Get started for free</button>
         </div>
       </section>
+
+      <section className="my-[9rem]">
+        <div className="text-center mb-5">
+          <p className="text-[#212121] font-bold text-[30px]">Frequently Asked Questions</p>
+          <p className="text-[#777575]">Got Questions? We've Got Answers!</p>
+        </div>
+        <div className="max-w-3xl mx-auto p-4">
+          {faqItems.map((item, index) => (
+            <div key={index} className="mb-4 border-b border-gray-200">
+              <button
+                onClick={() => toggleAnswer(index)}
+                className="w-full text-left py-2 flex justify-between items-center focus:outline-none"
+              >
+                <span className="text-md font-medium">{item.question}</span>
+                <span className="transform transition-transform duration-200">
+                  {activeIndex === index ? <RxMinus /> : <RxPlus />}
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
+                  activeIndex === index ? 'max-h-40' : 'max-h-0'
+                }`}
+              >
+                <p className="py-2 text-[#212121]">{item.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] flex items-start">
+        <div>
+          <div className="flex flex-col md:flex-row gap-12">
+            <div className="w-full md:w-1/2">
+              <h3 className="text-[#2E8B57] font-medium mb-2">Contact Us</h3>
+              <h2 className="text-4xl font-bold text-navy-900 mb-4 text-[#212121]">Easy to contact us</h2>
+              <p className="text-[#212121] mb-8">
+                We always ready to help by providing the best services for you. We beleive a good place to live can make your life better.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {contactMethods.map((method, index) => (
+                  <div 
+                    key={index} 
+                    className="p-4 bg-white rounded-lg shadow-sm border contact cursor-pointer"
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-[32px] h-[32px] bg-[#165751] rounded-full flex items-center justify-center text-white">
+                        {method.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-lg">{method.title}</h3>
+                        <p className="text-[#121212]">{method.number}</p>
+                      </div>
+                    </div>
+                    <button className="w-full py-3 bg-[#EEF1EE] text-[#121212] rounded-lg hover:bg-blue-100 transition-colors">
+                      Call Now
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="w-full md:w-1/2">
+              <img 
+                src="./images/contact.png"
+                alt="Modern house"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#13544E] md:px-[6.2rem] px-[0px] pt-[80px] flex items-start justify-between my-[9rem] text-white">
+        <div className="w-[50%] mt-[60px]">
+          <p  className="font-bold text-[48px]">Do more on the app</p>
+          <p className="text-[22px]">
+            Save your searches, buy, rent and sell properties. Get dimensions of properties and more. Available on iOS and Android
+          </p>
+          <div className="flex items-center gap-5 pt-5">
+            <img src="./images/play-store.svg" alt="" className="w-[120px]" />
+            <img src="./images/apple-store.svg" alt="" className="w-[120px]" />
+          </div>
+        </div>
+        <img src="./images/mockup-2.svg" className="w-[400px]" alt="" />
+      </section>
+
+      <footer className="text-[#777575]">
+        <div className="md:max-w-[2000px] w-[95%] mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo and Vision Section */}
+            <div className="flex flex-col gap-2 w-[400px]">
+              <div className="flex items-center gap-1">
+                <h1 className="text-3xl font-bold text-[#22AC00]">Zillow9ja</h1>
+              </div>
+              <p className="text-[#777575] text-[13px]">
+               Zillow9ja is Nigeria's trusted platform for buying, selling, and renting apartments. We connect people to their perfect homes with ease, offering a wide range of verified listings, simple search tools, and reliable support. Whether you're looking for a place to live or a buyer for your property, Zillow9ja makes the process smooth and stress-free.
+              </p>
+            </div>
+
+            {/* Newsletter Section */}
+            <div className="flex flex-col gap-2">
+              <h2 className="text-[#777575] text-[13px]">Subscribe for our weekly news letter</h2>
+              <form onSubmit={handleSubmit} className="flex text-[13px]">
+                <input
+                  type="email"
+                  placeholder="johndoe@gmail.com"
+                  className="px-4 py-2 rounded-l bg-white text-black w-[20rem] border focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#13544E] text-white px-4 py-2 rounded-r flex items-center gap-2 hover:bg-[#154742] transition-colors"
+                >
+                  Submit
+                  <IoIosSend />
+                </button>
+              </form>
+            </div>
+
+            {/* Location and Navigation */}
+            <div className="flex flex-col items-end gap-2">
+              <div className="flex flex-col items-end gap-2 text-[#777575]">
+                <IoLocationOutline className="text-[20px]" />
+                <p className=" text-[13px]">145 New York, FL 5467, USA</p>
+              </div>
+              <nav>
+                <ul className="flex gap-6 text-[#777575] text-[13px]">
+                  <li><a href="#" className="hover:text-[#121212] transition-colors">Buy</a></li>
+                  <li><a href="#" className="hover:text-[#121212] transition-colors">Sell</a></li>
+                  <li><a href="#" className="hover:text-[#121212] transition-colors">Find an agent</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <p className="bg-[#121212] text-white py-5 text-center text-[14px] mt-5">&copy; All Right Reserved {new Date().getFullYear()} </p>
     </div>
   );
 }
