@@ -573,7 +573,14 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      <p className="bg-[#121212] text-white py-5 text-center text-[14px] mt-5">&copy; All Right Reserved {new Date().getFullYear()} </p>
+      <div className="bg-[#121212] text-white py-5 text-center text-[14px] mt-5">
+        <div className="mb-5">
+          <a href="#" className="text-sm text-[#777575]">Privacy Policy</a>
+          <span className="mx-2">|</span>
+          <a href="#" className="text-sm text-[#777575]">Terms and Conditions</a>
+        </div>
+        <p>&copy; All Right Reserved {new Date().getFullYear()} </p>
+      </div>
     </div>
   );
 }
