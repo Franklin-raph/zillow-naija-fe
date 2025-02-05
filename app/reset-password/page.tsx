@@ -19,20 +19,15 @@ export default function page() {
     const [msg, setMsg] = useState<string>('')
     const [alertType, setAlertType] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
-    const roleArray = [
-        'Admin',
-        'User'
-    ]
-    const [registerData, setRegisterData] = useState({
-        email: '',
+    const [passwordResetData, setPasswordResetData] = useState({
         password: '',
         confirmPassword: '',
-        role: ''
+        token: ''
     })
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
-        setRegisterData(prev => ({
+        setPasswordResetData(prev => ({
             ...prev,
             [name]: value
         }));
@@ -40,24 +35,24 @@ export default function page() {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log(registerData);
+        console.log(passwordResetData);
         
         // Validation
         try {
-            if(!registerData.email || !registerData.password || !registerData.confirmPassword) {
+            if(!passwordResetData.password || !passwordResetData.confirmPassword) {
                 setMsg('Please fill in all fields.');
                 setAlertType('error');
                 return
             }
-            if(registerData.password!== registerData.confirmPassword){
+            if(passwordResetData.password!== passwordResetData.confirmPassword){
                 setMsg('Passwords do not match.');
                 setAlertType('error');
                 return
             }
             setLoading(true)
             console.log("Sign Up");
-            const response = await post('/register', {role:registerData.role, email: registerData.email, password: registerData.password});
-            router.push(`/register/${registerData.email}`)
+            const response = await post('/register', {email:"lll", password: passwordResetData.password, token:passwordResetData.token});
+            router.push(`/login`)
             console.log(response);
         } catch (error: any) {
             console.log(error);
@@ -84,35 +79,13 @@ export default function page() {
             <h1 className='font-[600] text-[#101750] text-[24px]'>Create account</h1>
             <p className='mb-7'>Welcome to Zillow9ja. Let's create your account</p>
             <div>
-                <p>Email</p>
-                <input type="text" placeholder='jhondoe@gmail.com' onChange={handleInputChange} name='email' value={registerData.email} className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
-            </div>
-            <div className='w-full mt-6 relative'>
-                <p>Select Role</p>
-                <div onClick={() => setDropDown(dropDown === 'user-type' ? '' : 'user-type' )} className='border border-[#C2C5E1] h-[42px] pl-2 rounded-[6px] pr-2 flex items-center justify-between cursor-pointer'>
-                    <p>{registerData.role}</p>
-                    <BiChevronDown className='text-[20px]'/>
-                </div>
-                {
-                    dropDown === 'user-type' && (
-                        <div className='absolute z-10 top-[65px] bg-[#fff] rounded-[8px] w-full border border-[#C2C5E1] h-[80px] overflow-y-auto'>
-                            {
-                                roleArray.map((role, index) => (
-                                    <div key={index} onClick={() => {
-                                        setRegisterData({...registerData, role })
-                                        setDropDown('')
-                                    }} 
-                                    className='py-2 px-2 text-[14px] border-b-[#C2C5E1] border-b-0 cursor-pointer hover:bg-[#F5F6F7]'>{role}</div>
-                                ))
-                            }
-                        </div>
-                    )
-                }
+                <p>Token</p>
+                <input type="text" placeholder='jhondoe@gmail.com' onChange={handleInputChange} name='token' value={passwordResetData.token} className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
             </div>
             <div className='mt-6'>
                 <p>Password</p>
                 <div className='border border-[#C2C5E1] h-[42px] rounded-[6px] mt-1 pr-2 flex items-center justify-between'>
-                    <input value={registerData.password} name='password' onChange={handleInputChange} type={showPassword ? "text" : "password"} placeholder='********' className='pl-2 w-full outline-none' />
+                    <input value={passwordResetData.password} name='password' onChange={handleInputChange} type={showPassword ? "text" : "password"} placeholder='********' className='pl-2 w-full outline-none' />
                     {
                         showPassword?
                         <BsEyeSlash className='cursor-pointer' onClick={() => setShowPassword(false)}/>
@@ -124,7 +97,7 @@ export default function page() {
             <div className='mt-6'>
                 <p>Confirm Password</p>
                 <div className='border border-[#C2C5E1] h-[42px] rounded-[6px] mt-1 pr-2 flex items-center justify-between'>
-                    <input value={registerData.confirmPassword} name='confirmPassword' onChange={handleInputChange} type={showPassword ? "text" : "password"} placeholder='********' className='pl-2 w-full outline-none' />
+                    <input value={passwordResetData.confirmPassword} name='confirmPassword' onChange={handleInputChange} type={showPassword ? "text" : "password"} placeholder='********' className='pl-2 w-full outline-none' />
                     {
                         showPassword?
                         <BsEyeSlash className='cursor-pointer' onClick={() => setShowPassword(false)}/>
@@ -141,17 +114,6 @@ export default function page() {
                 :
                 <button className='w-full bg-[#2E8B57] text-white py-[0.4rem] mt-6 rounded-[6px]' onClick={handleSubmit}>Sign Up</button>
             }
-            <div className='flex items-center gap-2 text-[13px] mt-2'>
-                <input type="checkbox" />
-                <p>By submitting, I agree to the terms and conditions of Zillow9ja</p>
-            </div>
-            <div className='flex items-center mt-5'>
-                <p className='h-[1px] bg-[#777575] w-full'></p>
-                <p className='px-4'>OR</p>
-                <p className='h-[1px] bg-[#777575] w-full'></p>
-            </div>
-            <button className='w-full text-[#212121] border border-[#C2C5E1] py-[0.4rem] mt-6 rounded-[6px] flex items-center justify-center gap-4'> <FcGoogle /> Continue with Google</button>
-            <p className='text-[13px] mt-5 text-center'>Already have an account? <span className='text-[#2E8B57] cursor-pointer' onClick={() => router.push('/login')}>Log In</span> </p>
         </div>
         <Footer />
     </div>

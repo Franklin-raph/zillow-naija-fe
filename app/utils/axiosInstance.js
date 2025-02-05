@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
                 console.log('Unauthorized! Logging out...');
                 localStorage.removeItem('token');
                 Cookies.remove('token');
-                window.location.href = '/login';
+                // window.location.href = '/login';
             }
         } else if (error) {
             // The request was made but no response was received
