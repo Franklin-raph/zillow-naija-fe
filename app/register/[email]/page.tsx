@@ -63,6 +63,12 @@ export default function page() {
   return (
     <>
         <Navbar />
+        <div className='bg-[#F5F6F7]'>
+            <div className='py-[4rem] max-w-[1600px] mx-auto px-[4rem]'>
+                <h1 className='text-[#101750] text-[32px] font-bold'>My Account</h1>
+                <p>Home / Register / <span className='text-[#2E8B57]'>Verify Account</span></p>
+            </div>
+        </div>
         <div className='w-[100%] mx-auto my-[7rem]'>
             <div className='w-[100%] md:w-[70%] mx-auto'>
                 <div

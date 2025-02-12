@@ -15,7 +15,7 @@ export default function Navbar() {
         },
         {
             label: "Sell",
-            link: "/",
+            link: "/sell",
         },
         {
             label: "Short Let",

@@ -1,8 +1,12 @@
+"use client"
+
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { BiBed } from 'react-icons/bi'
 import { TbCurrencyNaira } from 'react-icons/tb'
 
 interface Property {
+
     title: string;
     location: string;
     price: string;
@@ -15,9 +19,13 @@ interface Property {
     property: Property;
   }
 
-export default function RecentlyPostedHomeCards({ property }: PropertyCardProps) {
-  return (
-    <div className='mb-5 shadow-md rounded-[20px] relative cursor-pointer'>
+  
+  export default function RecentlyPostedHomeCards({ property }: PropertyCardProps) {
+    
+    const router = useRouter()
+
+    return (
+    <div onClick={() => router.push(`/properties/${123}`)} className='mb-5 shadow-md rounded-[20px] relative cursor-pointer'>
         <p className='absolute bg-[#212121] text-white md:top-[40px] top-[20px] px-3 py-1 md:text-[14px] text-[12px] rounded-r-[5px]'>{property.tag}</p>
         <img src={property.image} alt="" className='md:h-[250px] h-[150px]  object-cover w-full rounded-t-[20px]'/>
         <div className='p-4'>
