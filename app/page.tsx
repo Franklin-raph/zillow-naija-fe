@@ -40,7 +40,7 @@ export default function Home() {
     {
       title: 'Portable 4 Bedroom Bungalow',
       location: 'Adeniran Ogunsanya Surulere, Lagos',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: '5 mins Ago',
       image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -48,7 +48,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: '10 mins Ago',
       image: "./images/suggested-image-2.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -56,7 +56,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Independence Layout Nza, Enugu',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: '8 mins Ago',
       image: "./images/suggested-image-3.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -64,7 +64,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: '5 mins Ago',
       image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -72,7 +72,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Independence Layout Nza, Enugu',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: '25 mins Ago',
       image: "./images/suggested-image-2.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -80,7 +80,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: 'Yesterday',
       image: "./images/suggested-image-3.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -88,7 +88,7 @@ export default function Home() {
     {
       title: 'Luxury 4 Bedroom Duplex',
       location: 'Independence Layout Nza, Enugu',
-      price: '#3,500,000',
+      price: '3,500,000',
       tag: 'Last week',
       image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
@@ -167,12 +167,12 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <section className='flex md:justify-between items-start flex-col md:flex-row pt-[3rem] relative max-w-[1600px] mx-auto px-[4rem] gap-5 bg-[#F5F6F7]'>
-        <div className='py-14 md:pb-0 md:pt-[6rem] lg:w-[45%] md:w-[70%] w-[98%] relative bottom-[20px]'>
-          <p className="lg:text-[50px] md:text-[40px] text-[30px] font-[700] text-center md:text-left leading-[65px] mb-5">
+      <section className='flex md:justify-between items-start flex-col md:flex-row pt-[3rem] relative max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] gap-5 bg-[#F5F6F7]'>
+        <div className='md:py-14 md:pb-0 md:pt-[6rem] lg:w-[45%] md:w-[70%] w-[98%] relative bottom-[20px]'>
+          <p className="lg:text-[50px] md:text-[40px] text-[35px] font-[700] text-center md:text-left md:leading-[65px] mb-5">
             Buy, Lease, rent, or sell your property easily with Zillow9ja
           </p>
-          <p className="text-[20px] text-[#212121]">
+          <p className="md:text-[20px] text-[#212121]">
             Discover a range of possibilities for purchasing, selling, or leasing properties that suit your requirements.
           </p>
           <div>
@@ -200,7 +200,7 @@ export default function Home() {
           <HomeStatsCounter />
         </div>
         
-        <div className="md:w-[50%] w-full h-[400px] md:h-[500px] overflow-hidden bottom-[-110px] relative">
+        <div className="md:w-[50%] w-full h-[400px] md:h-[500px] overflow-hidden md:bottom-[-110px] bottom-[-20px] relative">
           <Swiper
             direction={'vertical'}
             modules={[Pagination, Autoplay]}
@@ -259,13 +259,13 @@ export default function Home() {
           <p className="px-[5px] py-[2px] text-[#212121]">View all suggested homes</p>
           <GoArrowRight className="transition-transform duration-300 group-hover:translate-x-3" />
         </div>
-        <div className="text-center bg-gradient-to-r from-[#2E8B57] to-[#13544E] h-64 flex flex-col items-center justify-center text-white mt-[60px] rounded-[18px]">
+        <div className="px-6 text-center bg-gradient-to-r from-[#2E8B57] to-[#13544E] h-64 flex flex-col items-center justify-center text-white mt-[60px] rounded-[18px]">
           <p className="font-[600] md:text-[30px] text-[20px]">You're a step away from your dream home</p>
           <button className="py-[10px] px-[20px] bg-[#2E8B57] mt-7 rounded-[8px]">Sign Up</button>
         </div>
       </section>
 
-      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] py-[80px]">
+      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pb-[80px]">
         <p className="font-[#212121] font-[700] md:text-[25px] text-[18px] mb-3">Recently Posted</p>
         <Swiper
           slidesPerView={1}
@@ -286,7 +286,7 @@ export default function Home() {
             },
           }}
           modules={[Pagination, Autoplay]}
-          className="mySwiper md:h-[470px] h-[420px]"
+          className="mySwiper md:h-[470px] h-[350px]"
           loop={true}
           style={{
             '--swiper-pagination-color': '#22AC00', // Active bullet color
@@ -305,10 +305,10 @@ export default function Home() {
         </Swiper>
       </section>
 
-      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[80px] flex items-start">
-        <img src="./images/sold.png" alt="" className="w-[50%] h-[500px] object-cover rounded-[10px]" />
-        <div className="w-[50%] ml-[50px] grid grid-cols-1 gap-5">
-          <div className="border-2 rounded-t-[7px]">
+      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[40px] flex items-start flex-col md:flex-row">
+        <img src="./images/sold.png" alt="" className="md:w-[50%] h-[500px] object-cover rounded-[10px] w-full" />
+        <div className="md:w-[50%] w-full md:ml-[50px] mt-[50px] md:mt-0 grid grid-cols-1 gap-5">
+          <div className="border-2 rounded-t-[7px] md:block hidden">
             <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, first: !aboutSection.first})}>
               <div className="flex items-center gap-4">
                 <img src="./images/buy.svg" alt="" className="w-[35px]" />
@@ -326,7 +326,20 @@ export default function Home() {
               )
             }
           </div>
-          <div className="my-4 border-2 rounded-t-[7px]">
+
+          <div className="my-4 border-2 rounded-t-[7px] md:hidden block">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer">
+              <div className="flex items-center gap-4">
+                <img src="./images/sell.svg" alt="" className="w-[35px]" />
+                <p>Buy a home</p>
+              </div>
+            </div>
+              <div className="mt-5 py-[8px] px-5">
+                <p>Discover the perfect home that fits your style and budget. With verified listings and expert support, we make buying a home stress free.</p>
+              </div>
+          </div>
+
+          <div className="my-4 border-2 rounded-t-[7px] md:block hidden">
             <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, second: !aboutSection.second})}>
               <div className="flex items-center gap-4">
                 <img src="./images/sell.svg" alt="" className="w-[35px]" />
@@ -336,15 +349,21 @@ export default function Home() {
                 aboutSection.second ? <HiOutlineChevronDown className="text-[20px]"/> : <HiOutlineChevronUp className="text-[20px]"/>
               }
             </div>
-            {
-              aboutSection.second && (
-                <div className="mt-5 py-[8px] px-5">
-                  <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we'll work with you to find the best price and buyer.</p>
-                </div>
-              )
-            }
           </div>
-          <div className="border-2 rounded-t-[7px]">
+
+          <div className="my-4 border-2 rounded-t-[7px] md:hidden block">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer">
+              <div className="flex items-center gap-4">
+                <img src="./images/sell.svg" alt="" className="w-[35px]" />
+                <p>Sell a home</p>
+              </div>
+            </div>
+              <div className="mt-5 py-[8px] px-5">
+                <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we'll work with you to find the best price and buyer.</p>
+              </div>
+          </div>
+
+          <div className="border-2 rounded-t-[7px] md:block hidden">
             <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer" onClick={() => setAboutSection({...aboutSection, third: !aboutSection.third})}>
               <div className="flex items-center gap-4">
                 <img src="./images/rent.svg" alt="" className="w-[35px]" />
@@ -362,8 +381,21 @@ export default function Home() {
               )
             }
           </div>
+
+          <div className="my-4 border-2 rounded-t-[7px] md:hidden block">
+            <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer">
+              <div className="flex items-center gap-4">
+                <img src="./images/sell.svg" alt="" className="w-[35px]" />
+                <p>Rent a home</p>
+              </div>
+            </div>
+              <div className="mt-5 py-[8px] px-5">
+                <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We've got you covered at Zillow9ja.</p>
+              </div>
+          </div>
         </div>
       </section>
+      
       <div className="text-center">
         <div className="flex items-center justify-center mt-20">
           <img src="./images/user1.png" alt="" className="w-[70px]"/>
@@ -375,9 +407,9 @@ export default function Home() {
 
       <section id="why-choose-us-section" className="relative mt-[80px]">
         <div className="absolute bg-black bg-opacity-70 h-full w-full top-0 z-[1]"></div>
-        <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] ml-[2.5rem] pt-[0px]">
-          <p className="font-[800] text-[40px]">Why Choose Us</p>
-          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] ml-[1rem] md:ml-[2.5rem] pt-[0px]">
+          <p className="font-[800] md:text-[40px] text-[20px]">Why Choose Us</p>
+          <p className="text-[14px] md:text-[16px]">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         </div>
         <div className="relative z-[2] md:max-w-[1600px] mx-auto w-[95%] md:px-[4rem] pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
           <div className="flex items-center gap-5">
@@ -386,7 +418,7 @@ export default function Home() {
             </div>
             <div>
               <p className="font-[700] mb-2">Wide Property Selection</p>
-              <p>Explore thousands of listings tailored to your needs, from budget-friendly apartments to luxury homes, all in one place.</p>
+              <p className="text-[13px] md:text-[16px]">Explore thousands of listings tailored to your needs, from budget-friendly apartments to luxury homes, all in one place.</p>
             </div>
           </div>
           <div className="flex items-center gap-5">
@@ -395,7 +427,7 @@ export default function Home() {
             </div>
             <div>
               <p className="font-[700] mb-2">Verified Listings</p>
-              <p>Enjoy peace of mind with properties verified for accuracy and authenticity, ensuring a safe and secure transaction process.</p>
+              <p className="text-[13px] md:text-[16px]">Enjoy peace of mind with properties verified for accuracy and authenticity, ensuring a safe and secure transaction process.</p>
             </div>
           </div>
           <div className="flex items-center gap-5">
@@ -404,7 +436,7 @@ export default function Home() {
             </div>
             <div>
               <p className="font-[700] mb-2">User-Friendly Interface</p>
-              <p>Our intuitive platform makes searching, comparing, and contacting property owners or agents seamless and hassle-free.</p>
+              <p className="text-[13px] md:text-[16px]">Our intuitive platform makes searching, comparing, and contacting property owners or agents seamless and hassle-free.</p>
             </div>
           </div>
           <div className="flex items-center gap-5">
@@ -413,7 +445,7 @@ export default function Home() {
             </div>
             <div>
               <p className="font-[700] mb-2">Find your future home</p>
-              <p>We help you find a new home by offering a smart real estate.</p>
+              <p className="text-[13px] md:text-[16px]">We help you find a new home by offering a smart real estate.</p>
             </div>
           </div>
         </div>
@@ -421,8 +453,8 @@ export default function Home() {
 
       <section className="bg-[#F5F6F7] py-[9rem]">
         <div className="text-center mb-8">
-          <p className="text-[#212121] font-bold text-[30px]">Don't take our words for it!</p>
-          <p>See what some of our users has to say about Zillow9ja</p>
+          <p className="text-[#212121] font-bold md:text-[30px] text-[20px]">Don't take our words for it!</p>
+          <p className="text-[14px] md:text-[16px]">See what some of our users has to say about Zillow9ja</p>
         </div>
         <TestimonialSwiper />
       </section>
@@ -430,15 +462,15 @@ export default function Home() {
       <section className="bg-[#165751] py-[6rem]">
         <div className="text-center mb-8 text-white">
           <p className="text-[18px] text-center mb-1">Get Started with Zillow9ja</p>
-          <p className="text-[35px] w-[700px] font-bold mx-auto">Looking for a place to call home or ready  to sell one?  Zillow9ja makes it easy!</p>
+          <p className="md:text-[35px] md:w-[700px] px-5 font-bold mx-auto">Looking for a place to call home or ready  to sell one?  Zillow9ja makes it easy!</p>
           <button className="py-[15px] px-[25px] text-[#2E8B57] bg-[#fff] mt-7 rounded-[8px] font-[500]">Get started for free</button>
         </div>
       </section>
 
-      <section className="my-[9rem]">
+      <section className="mt-[9rem] mb-[5rem]">
         <div className="text-center mb-5">
-          <p className="text-[#212121] font-bold text-[30px]">Frequently Asked Questions</p>
-          <p className="text-[#777575]">Got Questions? We've Got Answers!</p>
+          <p className="text-[#212121] font-bold md:text-[30px] text-[20px]">Frequently Asked Questions</p>
+          <p className="text-[#777575] text-[14px] md:text-[16px]">Got Questions? We've Got Answers!</p>
         </div>
         <div className="max-w-3xl mx-auto p-4">
           {faqItems.map((item, index) => (
@@ -457,23 +489,23 @@ export default function Home() {
                   activeIndex === index ? 'max-h-40' : 'max-h-0'
                 }`}
               >
-                <p className="py-2 text-[#212121]">{item.answer}</p>
+                <p className="py-2 text-[#212121] text-[14px] md:text-[16px]">{item.answer}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] flex items-start">
+      <section className="md:max-w-[1600px] w-[95%] mx-auto lg:px-[2rem] flex items-start">
         <div>
           <div className="flex flex-col md:flex-row gap-12">
             <div className="w-full md:w-1/2">
               <h3 className="text-[#2E8B57] font-medium mb-2">Contact Us</h3>
-              <h2 className="text-4xl font-bold text-navy-900 mb-4 text-[#212121]">Easy to contact us</h2>
-              <p className="text-[#212121] mb-8">
+              <h2 className="md:text-4xl text-xl font-bold text-navy-900 mb-4 text-[#212121]">Easy to contact us</h2>
+              <p className="text-[#212121] mb-8 text-[14px] md:text-[16px]">
                 We always ready to help by providing the best services for you. We beleive a good place to live can make your life better.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
                 {contactMethods.map((method, index) => (
                   <div 
                     key={index} 
@@ -484,8 +516,8 @@ export default function Home() {
                         {method.icon}
                       </div>
                       <div>
-                        <h3 className="font-medium text-lg">{method.title}</h3>
-                        <p className="text-[#121212]">{method.number}</p>
+                        <h3 className="font-medium md:text-lg">{method.title}</h3>
+                        <p className="text-[#121212] text-[14px] md:text-[16px]">{method.number}</p>
                       </div>
                     </div>
                     <button className="w-full py-3 bg-[#EEF1EE] text-[#121212] rounded-lg hover:bg-blue-100 transition-colors">
@@ -506,18 +538,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#13544E] md:px-[6.2rem] px-[0px] pt-[80px] flex items-start justify-between my-[9rem] text-white">
-        <div className="w-[50%] mt-[60px]">
-          <p  className="font-bold text-[48px]">Do more on the app</p>
-          <p className="text-[22px]">
+      <section className="bg-[#13544E] lg:px-[6.2rem] md:px-[2.2rem] px-[0px] pt-[80px] flex items-start justify-between flex-col md:flex-row my-[9rem] text-white">
+        <div className="md:w-[50%] mt-[40px] text-center md:text-left mb-[60px]">
+          <p  className="font-bold md:text-[48px] text-[28px]">Do more on the app</p>
+          <p className="md:text-[22px]">
             Save your searches, buy, rent and sell properties. Get dimensions of properties and more. Available on iOS and Android
           </p>
-          <div className="flex items-center gap-5 pt-5">
+          <div className="flex items-center md:justify-normal justify-center gap-5 pt-5">
             <img src="./images/play-store.svg" alt="" className="w-[120px]" />
             <img src="./images/apple-store.svg" alt="" className="w-[120px]" />
           </div>
         </div>
-        <img src="./images/mockup-2.svg" className="w-[400px]" alt="" />
+        <img src="./images/mockup-2.svg" className="w-[400px] mx-auto" alt="" />
       </section>
 
       <Footer />

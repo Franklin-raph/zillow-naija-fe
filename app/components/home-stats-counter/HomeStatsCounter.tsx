@@ -50,10 +50,10 @@ export default function HomeStatsCounter() {
         <div className="flex items-center justify-between mt-5">
             {stats.map((stat, index) => (
                 <div key={index} className="text-center flex items-center flex-col">
-                    <div className="text-[30px] mb-[7px]">{stat.icon}</div>
+                    <div className="md:text-[30px] text-[20px] mb-[7px]">{stat.icon}</div>
                     {/* <RiKey2Line className="text-[40px]"/> */}
-                    <p className="text-[25px] my-[-10px]">{counts[index]}+</p>
-                    <p className="mt-2">{stat.label}</p>
+                    <p className="md:text-[25px] text-[18px] my-[-10px]">{counts[index]}+</p>
+                    <p className="mt-2 md:text-[16px] text-[13px]">{stat.label}</p>
                 </div>
             ))}
         </div>

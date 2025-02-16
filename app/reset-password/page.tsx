@@ -10,8 +10,9 @@ import BtnLoader from '../components/btnLoader/BtnLoader'
 import { post } from '../utils/axiosHelpers'
 import { BiChevronDown } from 'react-icons/bi'
 import { useRouter } from 'next/navigation'
+import { AxiosError } from 'axios'
 
-export default function page() {
+export default function Page() {
 
     const router = useRouter()
     const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -25,7 +26,7 @@ export default function page() {
         token: ''
     })
 
-    const handleInputChange = (e: any) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setPasswordResetData(prev => ({
             ...prev,
@@ -33,8 +34,7 @@ export default function page() {
         }));
     };
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         console.log(passwordResetData);
         
         // Validation
@@ -54,14 +54,15 @@ export default function page() {
             const response = await post('/register', {email:"lll", password: passwordResetData.password, token:passwordResetData.token});
             router.push(`/login`)
             console.log(response);
-        } catch (error: any) {
-            console.log(error);
-            
-            setMsg(error?.response?.data?.message);
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                setMsg(error.response?.data?.message || 'An error occurred');
+            } else {
+                setMsg('An unexpected error occurred.');
+            }
             setAlertType('error');
-            return;
-        }finally{
-            setLoading(false)
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -70,17 +71,17 @@ export default function page() {
         {msg && <Alert alertType={alertType} msg={msg} setMsg={setMsg} />}
         <Navbar />
         <div className='bg-[#F5F6F7]'>
-            <div className='py-[4rem] max-w-[1600px] mx-auto px-[4rem]'>
-                <h1 className='text-[#101750] text-[32px] font-bold'>My Account</h1>
-                <p>Home / <span className='text-[#2E8B57]'>Register</span></p>
+            <div className='md:py-[4rem] py-[2rem] max-w-[1600px] mx-auto md:px-[4rem] px-[1.2rem]'>
+                <h1 className='text-[#101750] md:text-[32px] text-[22px] font-bold'>My Account</h1>
+                <p className='md:text-[15px] text-[12px]'>Home / <span className='text-[#2E8B57]'>Reset Password</span></p>
             </div>
         </div>
-        <div className='w-[544px] mx-auto mt-[4rem] p-[4rem] shadow-xl text-[#9096B2] mb-[9rem]'>
-            <h1 className='font-[600] text-[#101750] text-[24px]'>Create account</h1>
-            <p className='mb-7'>Welcome to Zillow9ja. Let's create your account</p>
+        <div className='md:w-[544px] mx-auto mt-[4rem] md:p-[4rem] pb-[4rem] pt-[2rem] px-[1rem] shadow-xl text-[#9096B2] mb-[9rem]'>
+            <h1 className='font-[600] text-[#101750] text-[24px] mb-7'>Reset account password</h1>
+            {/* <p className='mb-7'>Welcome to Zillow9ja. Let's create your account</p> */}
             <div>
                 <p>Token</p>
-                <input type="text" placeholder='jhondoe@gmail.com' onChange={handleInputChange} name='token' value={passwordResetData.token} className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
+                <input type="text" placeholder='1234' onChange={handleInputChange} name='token' value={passwordResetData.token} className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
             </div>
             <div className='mt-6'>
                 <p>Password</p>

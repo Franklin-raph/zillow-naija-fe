@@ -3,7 +3,7 @@ import Navbar from '../components/nav-bar/Navbar'
 import Footer from '../components/footer/Footer'
 import { RiHome4Line } from 'react-icons/ri'
 
-export default function page() {
+export default function Page() {
   return (
     <div>
         <Navbar />

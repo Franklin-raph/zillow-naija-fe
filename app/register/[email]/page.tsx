@@ -9,6 +9,7 @@ import { post } from '../../utils/axiosHelpers'
 import BtnLoader from '../../components/btnLoader/BtnLoader'
 import Alert from '../../components/alert/Alert'
 import Cookies from 'js-cookie';
+import { AxiosError } from 'axios'
 
 export default function page() {
 
@@ -31,13 +32,15 @@ export default function page() {
             localStorage.setItem('user', JSON.stringify(res.data.user));
             router.push('/complete-registeration')
             
-        } catch (error) {
-            setMsg(error?.response?.data?.message)
-            setAlertType('error')
-            console.log(error);
-            
-        }finally{
-            setIsLoading(false)
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                setMsg(error.response?.data?.message || 'An error occurred');
+            } else {
+                setMsg('An unexpected error occurred.');
+            }
+            setAlertType('error');
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -50,13 +53,15 @@ export default function page() {
             setMsg(res?.message)
             setAlertType('success')
             
-        } catch (error) {
-            setMsg(error?.response?.data?.message)
-            setAlertType('error')
-            console.log(error);
-            
-        }finally{
-            setIsLoading(false)
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                setMsg(error.response?.data?.message || 'An error occurred');
+            } else {
+                setMsg('An unexpected error occurred.');
+            }
+            setAlertType('error');
+        } finally {
+            setIsLoading(false);
         }
     }
 

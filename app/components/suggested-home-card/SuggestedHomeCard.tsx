@@ -7,7 +7,7 @@ export default function HomeCard() {
     <div className='mb-5 shadow-md rounded-[20px] relative cursor-pointer'>
         <p className='absolute bg-[#2E8B57] text-white md:top-[40px] top-[20px] px-3 py-1 md:text-[14px] text-[12px] rounded-r-[5px]'>For Sale</p>
         <img src="./images/suggested-image-3.png" alt="" className='md:h-[250px] h-[150px] object-cover w-full rounded-t-[20px]'/>
-        <div className='p-4'>
+        <div className='py-4 md:px-4 px-2'>
             <p className='font-[600] md:text-[18px] text-[14px]'>Luxury 4 bedroom apartment</p>
             <p className='text-[14px] mt-1 mb-3'>Gwarimpa, Abuja, Abuja FCT</p>
             <p className='font-[700] text-[#2E8B57] md:text-[20px] text-[18px] flex items-center'> <TbCurrencyNaira /> 2,500,000</p>

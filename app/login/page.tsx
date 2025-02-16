@@ -10,8 +10,9 @@ import BtnLoader from '../components/btnLoader/BtnLoader'
 import Cookies from 'js-cookie';
 import { post } from '../utils/axiosHelpers';
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import { AxiosError } from 'axios'
 
-export default function page() {
+export default function Page() {
 
     const router = useRouter()
     const [loading, setLoading] = useState<boolean>(false)
@@ -42,15 +43,20 @@ export default function page() {
                 setAlertType('success');
                 window.location.assign('/dashboard');
             }
-        } catch (error: any) {
-            if(error?.response?.data?.data?.is_active === false){
-                router.push(`/register/${email}`)
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                if (error?.response?.data?.data?.is_active === false) {
+                    router.push(`/register/${email}`)
+                }
+                setMsg(error.response?.data?.message || 'An error occurred');
+            } else {
+                setMsg('An unexpected error occurred.');
             }
-            console.log(error);
-            // Handle errors from the POST request
-            setMsg(error?.response?.data?.message);
             setAlertType('error');
-        }finally{
+            // console.log(error)
+            // setMsg(error?.response?.data?.message)
+            // setAlertType('error')
+        } finally {
             setLoading(false)
         }
     }
@@ -60,12 +66,12 @@ export default function page() {
         {msg && <Alert alertType={alertType} msg={msg} setMsg={setMsg} />}
         <Navbar />
         <div className='bg-[#F5F6F7]'>
-            <div className='py-[4rem] max-w-[1600px] mx-auto px-[4rem]'>
-                <h1 className='text-[#101750] text-[32px] font-bold'>My Account</h1>
-                <p>Home / <span className='text-[#2E8B57]'>Login</span></p>
+            <div className='md:py-[4rem] py-[2rem] max-w-[1600px] mx-auto md:px-[4rem] px-[1.2rem]'>
+                <h1 className='text-[#101750] md:text-[32px] text-[22px] font-bold'>My Account</h1>
+                <p className='md:text-[15px] text-[12px]'>Home / <span className='text-[#2E8B57]'>Login</span></p>
             </div>
         </div>
-        <div className='w-[544px] mx-auto mt-[4rem] p-[4rem] shadow-xl text-[#9096B2] mb-[9rem]'>
+        <div className='md:w-[544px] mx-auto mt-[4rem] md:p-[4rem] pb-[4rem] px-[1rem] shadow-xl text-[#9096B2] mb-[9rem]'>
             <h1 className='font-[600] text-[#101750] text-[24px]'>Login</h1>
             <p className='mb-7'>Welcome back! We are happy to have you!.</p>
             <div>

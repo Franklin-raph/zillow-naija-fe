@@ -51,6 +51,17 @@ const TestimonialSwiper = () => {
           delay: 3000,
           disableOnInteraction: false,
         }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          600: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
         pagination={{
           clickable: true,
           bulletActiveClass: 'swiper-pagination-bullet-active bg-green-700',

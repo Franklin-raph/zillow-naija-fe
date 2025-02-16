@@ -32,7 +32,7 @@ interface Property {
             <p className='font-[600] md:text-[18px] text-[14px]'>{property.title}</p>
             <p className='text-[14px] mt-1 mb-3'>{property.location}</p>
             <p className='font-[700] text-[#2E8B57] md:text-[20px] text-[18px] flex items-center'> <TbCurrencyNaira /> {property.price}</p>
-            <div className='flex md:items-center flex-col md:flex-row items-left md:gap-4 mt-2 pb-4 text-[13px]'>
+            <div className='hidden md:flex md:items-center lg:flex-row items-left md:gap-4 mt-2 pb-4 text-[13px]'>
                 <div className='flex items-center gap-1'>
                     <img src='./images/bed.svg'/>
                     <p className='text-[#000929]'>3 Beds</p>

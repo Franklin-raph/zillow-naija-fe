@@ -2,8 +2,7 @@
 
 import Navbar from '@/app/components/nav-bar/Navbar'
 import React from 'react'
-import { BsSquare, BsSquareFill } from 'react-icons/bs'
-import { BiChevronDown, BiHomeHeart, BiKey, BiSearch } from "react-icons/bi";
+import { BsSquare } from 'react-icons/bs'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -13,13 +12,10 @@ import 'swiper/css/effect-fade';
 
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
-import SuggestedHomeCard from "../../components/suggested-home-card/SuggestedHomeCard";
-import { IoArrowForwardOutline, IoChatboxEllipsesOutline, IoLocationOutline, IoVideocamOutline } from "react-icons/io5";
-import { GoArrowRight, GoTasklist } from "react-icons/go";
 import RecentlyPostedHomeCards from "../../components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import Footer from '@/app/components/footer/Footer';
 
-export default function page() {
+export default function Page() {
 
     const properties = [
         {
