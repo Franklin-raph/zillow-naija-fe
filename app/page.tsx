@@ -240,7 +240,7 @@ export default function Home() {
           <GoArrowRight className="transition-transform duration-300 group-hover:translate-x-3" />
         </div>
         <div className="px-6 text-center bg-gradient-to-r from-[#2E8B57] to-[#13544E] h-64 flex flex-col items-center justify-center text-white mt-[60px] rounded-[18px]">
-          <p className="font-[600] md:text-[30px] text-[20px]">You're a step away from your dream home</p>
+          <p className="font-[600] md:text-[30px] text-[20px]">You&apos;re a step away from your dream home</p>
           <button className="py-[10px] px-[20px] bg-[#2E8B57] mt-7 rounded-[8px]">Sign Up</button>
         </div>
       </section>
@@ -339,7 +339,7 @@ export default function Home() {
               </div>
             </div>
               <div className="mt-5 py-[8px] px-5">
-                <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we'll work with you to find the best price and buyer.</p>
+                <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we&apos;ll work with you to find the best price and buyer.</p>
               </div>
           </div>
 
@@ -356,7 +356,7 @@ export default function Home() {
             {
               aboutSection.third && (
                 <div className="mt-5 py-[8px] px-5">
-                  <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We've got you covered at Zillow9ja.</p>
+                  <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We&apos;ve got you covered at Zillow9ja.</p>
                 </div>
               )
             }
@@ -370,7 +370,7 @@ export default function Home() {
               </div>
             </div>
               <div className="mt-5 py-[8px] px-5">
-                <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We've got you covered at Zillow9ja.</p>
+                <p>Looking for a place to call home? We make renting simple, hassle-free, and tailored to your needs. We&apos;ve got you covered at Zillow9ja.</p>
               </div>
           </div>
         </div>
@@ -389,7 +389,7 @@ export default function Home() {
         <div className="absolute bg-black bg-opacity-70 h-full w-full top-0 z-[1]"></div>
         <div className="relative z-[2] text-white md:max-w-[800px] w-[95%] md:px-[4rem] ml-[1rem] md:ml-[2.5rem] pt-[0px]">
           <p className="font-[800] md:text-[40px] text-[20px]">Why Choose Us</p>
-          <p className="text-[14px] md:text-[16px]">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <p className="text-[14px] md:text-[16px]">Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         </div>
         <div className="relative z-[2] md:max-w-[1600px] mx-auto w-[95%] md:px-[4rem] pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
           <div className="flex items-center gap-5">
@@ -433,7 +433,7 @@ export default function Home() {
 
       <section className="bg-[#F5F6F7] py-[9rem]">
         <div className="text-center mb-8">
-          <p className="text-[#212121] font-bold md:text-[30px] text-[20px]">Don't take our words for it!</p>
+          <p className="text-[#212121] font-bold md:text-[30px] text-[20px]">Don&apos;t take our words for it!</p>
           <p className="text-[14px] md:text-[16px]">See what some of our users has to say about Zillow9ja</p>
         </div>
         <TestimonialSwiper />
@@ -450,7 +450,7 @@ export default function Home() {
       <section className="mt-[9rem] mb-[5rem]">
         <div className="text-center mb-5">
           <p className="text-[#212121] font-bold md:text-[30px] text-[20px]">Frequently Asked Questions</p>
-          <p className="text-[#777575] text-[14px] md:text-[16px]">Got Questions? We've Got Answers!</p>
+          <p className="text-[#777575] text-[14px] md:text-[16px]">Got Questions? We&apos;ve Got Answers!</p>
         </div>
         <div className="max-w-3xl mx-auto p-4">
           {faqItems.map((item, index) => (

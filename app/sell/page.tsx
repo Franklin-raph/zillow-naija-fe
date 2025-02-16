@@ -31,7 +31,7 @@ export default function Page() {
                 </div>
             </div>
             <div className="text-center bg-gradient-to-r from-[#2E8B57] to-[#13544E] h-64 flex flex-col items-center justify-center text-white mt-[60px] rounded-[18px]">
-                <p className="font-[600] md:text-[30px] text-[20px]">You're a step away from your potential clients</p>
+                <p className="font-[600] md:text-[30px] text-[20px]">You&apos;re a step away from your potential clients</p>
                 <p>Start selling today! Download the Zillow9ja app now on the App Store and Google Play</p>
             </div>
         </div>

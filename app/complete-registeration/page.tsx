@@ -6,6 +6,7 @@ import Navbar from '../components/nav-bar/Navbar'
 import Alert from '../components/alert/Alert'
 import BtnLoader from '../components/btnLoader/BtnLoader'
 import { post } from '../utils/axiosHelpers'
+import { AxiosError } from 'axios'
 // import { useRouter } from 'next/navigation'
 
 export default function Page() {
@@ -42,14 +43,15 @@ export default function Page() {
             console.log("Sign Up");
             const response = await post('/register', registerData);
             console.log(response);
-        } catch (error: any) {
-            console.log(error);
-            
-            setMsg(error?.response?.data?.message);
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                setMsg(error.response?.data?.message || 'An error occurred');
+            } else {
+                setMsg('An unexpected error occurred.');
+            }
             setAlertType('error');
-            return;
-        }finally{
-            setLoading(false)
+        } finally {
+            setLoading(false);
         }
     }
 
