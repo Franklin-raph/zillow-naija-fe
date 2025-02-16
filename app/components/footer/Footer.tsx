@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
 
             {/* Location and Navigation */}
-            <div className="flex flex-col sm:items-end gap-2 md:w-[200px] w-[100px]">
+            <div className="flex flex-col sm:items-end gap-2 md:w-[200px] w-[80%]">
               <div className="flex flex-col sm:items-end gap-2 text-[#777575]">
                 <IoLocationOutline className="text-[20px]" />
                 <p className=" text-[13px]">145 New York, FL 5467, USA</p>
