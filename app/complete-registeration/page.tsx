@@ -18,7 +18,6 @@ export default function Page() {
         address: '',
         phone: '',
         fullName: '',
-
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +65,7 @@ export default function Page() {
         </div>
         <div className='md:w-[544px] mx-auto mt-[4rem] md:p-[4rem] pb-[4rem] pt-[2rem] px-[1rem] shadow-xl text-[#9096B2] mb-[9rem]'>
             <h1 className='font-[600] text-[#101750] text-[24px]'>Complete Registeration</h1>
-            <p className='mb-7'>Welcome to Zillow9ja. Let's create your account profile</p>
+            <p className='mb-7'>Welcome to Zillow9ja. Let&apos;s create your account profile</p>
             <div>
                 <p>Full Name</p>
                 <input type="text" placeholder='John Doe' onChange={handleInputChange} name='email' value={registerData.fullName} className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { JSX, useEffect, useState } from 'react'
 import { FaAward, FaRegSmile } from 'react-icons/fa';
 import { RiKey2Line } from 'react-icons/ri';
 
 interface StatItem {
     value: number;
     label: string;
-    icon: any;
+    icon: JSX.Element;
 }
 
 export default function HomeStatsCounter() {
