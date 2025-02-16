@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/nav-bar/Navbar";
-import { BiChevronDown, BiHomeHeart, BiKey, BiSearch } from "react-icons/bi";
+import { BiHomeHeart } from "react-icons/bi";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -13,22 +13,17 @@ import 'swiper/css/effect-fade';
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
 import SuggestedHomeCard from "./components/suggested-home-card/SuggestedHomeCard";
-import { IoArrowForwardOutline, IoChatboxEllipsesOutline, IoLocationOutline, IoVideocamOutline } from "react-icons/io5";
+import { IoChatboxEllipsesOutline, IoVideocamOutline } from "react-icons/io5";
 import { GoArrowRight, GoTasklist } from "react-icons/go";
 import RecentlyPostedHomeCards from "./components/recently-posted-homes-card/RecentlyPostedHomeCards";
-import { CiLocationOn } from "react-icons/ci";
 import { GrMapLocation } from "react-icons/gr";
-import { FaAward, FaPlus, FaRegSmile } from "react-icons/fa";
-import { RiKey2Line } from "react-icons/ri";
 import HomeStatsCounter from "./components/home-stats-counter/HomeStatsCounter";
-import { HiChevronDown, HiChevronUp, HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
 import { PiPhoneCall, PiSelectionPlusThin } from "react-icons/pi";
 import { LiaHandPointerSolid } from "react-icons/lia";
 import TestimonialSwiper from "./components/testimonial-component/TestimonialComponent";
 import { RxMinus, RxPlus } from "react-icons/rx";
-import Image from "next/image";
 import { FaRegMessage } from "react-icons/fa6";
-import { IoIosSend } from "react-icons/io";
 import Footer from "./components/footer/Footer";
 
 
@@ -92,21 +87,6 @@ export default function Home() {
       tag: 'Last week',
       image: "./images/suggested-image.png",
       details: ['38eds', '28abrooms', '5z7n²'],
-    },
-  ];
-
-  const testimonials = [
-    {
-      text: "I recently relocated to Port Harcourt and had no idea where to start. Their site helped me narrow down options based on my budget and preferences.",
-      author: "Chioma E., Port Harcourt",
-    },
-    {
-      text: "Zillow9ja made my house hunt stress-free. I was honestly tired of visiting places that didn’t match the pictures, but what I saw online was exactly what I got. The agent I worked with was professional and patient.",
-      author: "Amaka I., Lagos",
-    },
-    {
-      text: "I listed my apartment on Zillow9ja, and within a week, I had serious tenants reaching out. What stood out for me was how smooth and straightforward the entire process was. It saved me so much time.",
-      author: "Bayo A., Abuja",
     },
   ];
 

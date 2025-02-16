@@ -105,7 +105,7 @@ export default function Page() {
                 <p className='h-[1px] bg-[#777575] w-full'></p>
             </div>
             <button className='w-full text-[#212121] border border-[#C2C5E1] py-[0.4rem] mt-6 rounded-[6px] flex items-center justify-center gap-4'> <FcGoogle /> Continue with Google</button>
-            <p className='text-[13px] mt-5 text-center'>Don't have an Account? <span className='text-[#2E8B57] cursor-pointer' onClick={() => router.push('/register')}>Create account</span> </p>
+            <p className='text-[13px] mt-5 text-center'>Don&apos;t have an Account? <span className='text-[#2E8B57] cursor-pointer' onClick={() => router.push('/register')}>Create account</span> </p>
         </div>
         <Footer />
     </div>

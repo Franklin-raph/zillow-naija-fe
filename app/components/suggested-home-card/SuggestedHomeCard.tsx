@@ -1,5 +1,4 @@
 import React from 'react'
-import { BiBed } from 'react-icons/bi'
 import { TbCurrencyNaira } from 'react-icons/tb'
 
 export default function HomeCard() {
