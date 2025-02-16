@@ -149,7 +149,7 @@ export default function Home() {
       <Navbar />
       <section className='flex md:justify-between items-start flex-col md:flex-row pt-[3rem] relative max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] gap-5 bg-[#F5F6F7]'>
         <div className='md:py-14 md:pb-0 md:pt-[6rem] lg:w-[45%] md:w-[70%] w-[98%] relative bottom-[20px]'>
-          <p className="lg:text-[50px] md:text-[40px] text-[35px] font-[700] text-center md:text-left md:leading-[65px] mb-5">
+          <p className="lg:text-[50px] md:text-[40px] text-[35px] font-[700] text-left md:leading-[65px] mb-5 leading-[40px]">
             Buy, Lease, rent, or sell your property easily with Zillow9ja
           </p>
           <p className="md:text-[20px] text-[#212121]">
@@ -329,9 +329,16 @@ export default function Home() {
                 aboutSection.second ? <HiOutlineChevronDown className="text-[20px]"/> : <HiOutlineChevronUp className="text-[20px]"/>
               }
             </div>
+            {
+              aboutSection.second && (
+                <div className="mt-5 py-[8px] px-5">
+                  <p>Selling a home can be a rewarding and exciting experience. With our easy-to-use platform, you can list your home quickly and easily, and we&apos;ll work with you to find the best price and buyer.</p>
+                </div>
+              )
+            }
           </div>
 
-          <div className="my-4 border-2 rounded-t-[7px] md:hidden block">
+          <div className="border-2 rounded-t-[7px] md:hidden block">
             <div className="flex items-center justify-between bg-[#EEF1EE] py-[8px] font-[500] px-5 rounded-t-[5px] cursor-pointer">
               <div className="flex items-center gap-4">
                 <img src="./images/sell.svg" alt="" className="w-[35px]" />

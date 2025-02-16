@@ -34,7 +34,7 @@ export default function Navbar() {
     ]
 
   return (
-    <div className='flex items-center justify-between max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] py-8'>
+    <div className='flex items-center justify-between max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] md:py-8 py-6'>
         <div className='flex items-center gap-8 justify-between sm:justify-normal w-full sm:w-[80%]'>
             <Link className='text-[#22AC00] font-[700] mr-6' href="/">Zillow9ja</Link>
             <ul className='hidden sm:flex items-center gap-8'>
@@ -51,7 +51,7 @@ export default function Navbar() {
                 mobileNavOpen &&
                 <div className='block sm:hidden fixed left-0 top-0 h-[100%] bg-black z-[999] text-white w-[45%]'>
                     <div className='fixed top-0 left-0 w-[100%] h-full bg-[#000000ab] z-[1]' onClick={() => setMobileNavOpen(false)}></div>
-                    <div onClick={() => setMobileNavOpen(false)} className='text-white text-right fixed right-[16px] top-[32px] z-[2] border text-[20px] p-1 cursor-pointer'>
+                    <div onClick={() => setMobileNavOpen(false)} className='text-white text-right fixed right-[16px] top-[24px] z-[2] border text-[20px] p-1 cursor-pointer'>
                         <IoCloseOutline className='cursor-pointer'/>
                     </div>
                     <ul className='fixed flex flex-col items-start pt-[6rem] w-[70%] h-full bg-black z-[999]'>
@@ -67,7 +67,7 @@ export default function Navbar() {
                 </div>
             }
             <div onClick={() => setMobileNavOpen(true)} className='text-gray-400 text-right border border-gray-400 text-[20px] block cursor-pointer sm:hidden bg-white p-1'>
-                <BiMenu className=''/>
+                <BiMenu />
             </div>
         </div>
         <div className='hidden sm:flex items-center gap-5'>

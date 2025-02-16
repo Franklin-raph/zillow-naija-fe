@@ -10,7 +10,7 @@ export default function HomeCard() {
             <p className='font-[600] md:text-[18px] text-[14px]'>Luxury 4 bedroom apartment</p>
             <p className='text-[14px] mt-1 mb-3'>Gwarimpa, Abuja, Abuja FCT</p>
             <p className='font-[700] text-[#2E8B57] md:text-[20px] text-[18px] flex items-center'> <TbCurrencyNaira /> 2,500,000</p>
-            <div className='flex md:items-center flex-col md:flex-row items-left md:gap-4 mt-2 pb-4 text-[13px]'>
+            <div className='sm:flex hidden items-left md:gap-4 mt-2 pb-4 text-[13px]'>
                 <div className='flex items-center gap-1'>
                     <img src='./images/bed.svg'/>
                     <p className='text-[#000929]'>3 Beds</p>

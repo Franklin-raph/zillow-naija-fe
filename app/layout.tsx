@@ -1,7 +1,7 @@
 import "./globals.css";
-import { Raleway } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 
-const raleway = Raleway({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] }); // Customize subsets and weights
+const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] }); // Customize subsets and weights
 
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${raleway.className} antialiased`}>
+      <body className={`${outfit.className} antialiased`}>
         {children}
       </body>
     </html>
