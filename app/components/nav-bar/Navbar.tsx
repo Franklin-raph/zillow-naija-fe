@@ -34,7 +34,7 @@ export default function Navbar() {
     ]
 
   return (
-    <div className='flex items-center justify-between max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] md:py-8 py-6'>
+    <div className='flex items-center justify-between max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] md:py-8 py-6 border-b'>
         <div className='flex items-center gap-8 justify-between sm:justify-normal w-full sm:w-[80%]'>
             <Link className='text-[#22AC00] font-[700] mr-6' href="/">Zillow9ja</Link>
             <ul className='hidden sm:flex items-center gap-8'>
