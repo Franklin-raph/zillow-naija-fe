@@ -13,7 +13,7 @@ export default function Navbar() {
     const navLinks = [
         {
             label: "Buy",
-            link: "/",
+            link: "/buy",
         },
         {
             label: "Rent",

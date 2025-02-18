@@ -295,7 +295,7 @@ export default function Page() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </section>
+        </section>
 
         <section className="mt-[7rem] mb-[5rem]">
           <div className="text-center mb-5">
