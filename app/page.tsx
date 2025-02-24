@@ -25,11 +25,13 @@ import TestimonialSwiper from "./components/testimonial-component/TestimonialCom
 import { RxMinus, RxPlus } from "react-icons/rx";
 import { FaRegMessage } from "react-icons/fa6";
 import Footer from "./components/footer/Footer";
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
   const tabs = ["Buy", "Rent", "Sell"];
   const [selectedTab, setSelectedTab] = useState<string>(tabs[0]);
+  const router = useRouter()
 
   const properties = [
     {
@@ -241,7 +243,7 @@ export default function Home() {
         </div>
         <div className="px-6 text-center bg-gradient-to-r from-[#2E8B57] to-[#13544E] h-64 flex flex-col items-center justify-center text-white mt-[60px] rounded-[18px]">
           <p className="font-[600] md:text-[30px] text-[20px]">You&apos;re a step away from your dream home</p>
-          <button className="py-[10px] px-[20px] bg-[#2E8B57] mt-7 rounded-[8px]">Sign Up</button>
+          <button onClick={() => router.push('/register')} className="py-[10px] px-[20px] bg-[#2E8B57] mt-7 rounded-[8px]">Sign Up</button>
         </div>
       </section>
 
@@ -450,7 +452,7 @@ export default function Home() {
         <div className="text-center mb-8 text-white">
           <p className="text-[18px] text-center mb-1">Get Started with Zillow9ja</p>
           <p className="md:text-[35px] md:w-[700px] px-5 font-bold mx-auto">Looking for a place to call home or ready  to sell one?  Zillow9ja makes it easy!</p>
-          <button className="py-[15px] px-[25px] text-[#2E8B57] bg-[#fff] mt-7 rounded-[8px] font-[500]">Get started for free</button>
+          <button className="py-[15px] px-[25px] text-[#2E8B57] bg-[#fff] mt-7 rounded-[8px] font-[500]" onClick={() => router.push('/register')}>Get started for free</button>
         </div>
       </section>
 

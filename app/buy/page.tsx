@@ -69,7 +69,7 @@ export default function Page() {
   return (
     <div>
         <Navbar />
-        <div className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] pt-[40px]">
+        <div className="md:max-w-[1600px] w-[95%] mx-auto md:px-[4rem] px-[0px] py-[20px]">
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-2 border py-2 px-2 rounded-full w-[400px]'>
                     <BiSearch />
@@ -81,9 +81,8 @@ export default function Page() {
                 </div>
             </div>
         </div>
-        <div className='flex justify-between items-start py-8 px-4 h-[150vh] overflow-y-scroll'>
-            <img src="./images/map_view.png" className='w-[55%]' alt="" />
-            <div className='grid grid-cols-2 gap-3'>
+        <div className='flex justify-center items-start pb-8 px-4 lg:flex-row flex-col-reverse'>
+            <div className='grid grid-cols-4 content-center gap-3'>
                 {properties.map((property, index) => (
                     <FilterHomeCards key={index} property={property}/>
                 ))}

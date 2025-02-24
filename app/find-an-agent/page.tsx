@@ -17,6 +17,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import TopRatedAgents from '../components/top-rated-agents/TopRatedAgents'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
 
@@ -76,6 +77,8 @@ export default function Page() {
 
   const [searchParams, setSearchParams] = useState<string | null>(null);
 
+  const router = useRouter()
+
   return (
     <div>
         <Navbar />
@@ -126,7 +129,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -142,7 +145,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -158,7 +161,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -174,7 +177,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -190,7 +193,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -206,7 +209,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -222,7 +225,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
@@ -238,7 +241,7 @@ export default function Page() {
                       <p>3.0</p>
                       <BsStarFill className='text-[#F8BD00]'/>
                     </div>
-                    <button className='text-[#2E8B57]'>View managed properties</button>
+                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
                 </div>
               </div>
