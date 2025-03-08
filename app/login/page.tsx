@@ -36,13 +36,13 @@ export default function Page() {
             console.log(response);
             Cookies.set('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            if(response.data.user.current_stage === 'unboarding'){
-                router.push('/complete-registeration')
-            }else{
-                setMsg(`Login successful! Welcome`);
-                setAlertType('success');
-                window.location.assign('/dashboard');
-            }
+            // if(response.data.user.current_stage === 'unboarding'){
+            //     router.push('/complete-registeration')
+            // }else{
+            //     setMsg(`Login successful! Welcome`);
+            //     setAlertType('success');
+            // }
+            window.location.assign('/dashboard');
         } catch (error: unknown) {
             if (error instanceof AxiosError) {
                 if (error?.response?.data?.data?.is_active === false) {
