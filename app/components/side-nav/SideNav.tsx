@@ -28,7 +28,7 @@ const SideNav = ({toggle}: ToggleProps) => {
         <div className='px-5 pb-5 flex items-center justify-between'>
             <img src="./images/logo-white.svg" alt="" />
             <p 
-              onClick={() => toggle.setToggleNav(false)} 
+              onClick={() => toggle.setToggleNav(false)}
               className='text-white text-[22px] cursor-pointer lg:hidden block'
             >
               &times;
@@ -49,13 +49,13 @@ const SideNav = ({toggle}: ToggleProps) => {
               <p className="">Properties</p>
             </div>
           </Link>
-          <Link href='/my-profile' className={pathname === '/my-properties' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
+          <Link href='/my-profile' className={pathname === '/my-profile' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
             <div className="flex items-center gap-2">
               <HiOutlineUserCircle />
               <p className="">My Profile</p>
             </div>
           </Link>
-          <Link href='/account-settings' className={pathname === '/my-properties' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
+          <Link href='/account-settings' className={pathname === '/account-settings' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
             <div className="flex items-center gap-2">
               <IoSettingsOutline />
               <p className="">Settings</p>
