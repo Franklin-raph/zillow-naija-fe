@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideNav from '../components/side-nav/SideNav'
 import TopNav from '../components/top-nav/TopNav'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
-import { IoCloseOutline } from 'react-icons/io5' // Added missing import
 import BtnLoader from '../components/btnLoader/BtnLoader'
 import { get, put } from '../utils/axiosHelpers'
 import { AxiosError } from 'axios'
@@ -22,20 +21,15 @@ interface UserData {
   // Add other user properties as needed
 }
 
-// Define configuration constants
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || ''; // Add your default API URL
-
 export default function Page() {
   // State for navigation toggle
   const [toggleNav, setToggleNav] = useState<boolean>(false)
 
   // State for form status
   const [loading, setLoading] = useState<boolean>(false)
-  const [fileUploadLoader, setFileUploadLoader] = useState<boolean>(false)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [msg, setMsg] = useState<string>('')
   const [alertType, setAlertType] = useState<string>('')
-  const [alertTitle, setAlertTitle] = useState<string>('')
   
   // Available settings tabs
   const settings = ['Update Bio', 'Change Password', 'Update Contact Details', 'Deactivate Account']
