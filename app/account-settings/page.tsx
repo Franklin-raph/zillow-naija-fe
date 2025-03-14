@@ -1,69 +1,140 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SideNav from '../components/side-nav/SideNav'
 import TopNav from '../components/top-nav/TopNav'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import { IoCloseOutline } from 'react-icons/io5' // Added missing import
 import BtnLoader from '../components/btnLoader/BtnLoader'
-import { put } from '../utils/axiosHelpers'
+import { get, put } from '../utils/axiosHelpers'
 import { AxiosError } from 'axios'
 import Alert from '../components/alert/Alert'
 
+
+interface UserData {
+  id: string;
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  bio?: string;
+  address?: string;
+  sex?: string;
+  // Add other user properties as needed
+}
+
+// Define configuration constants
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || ''; // Add your default API URL
+
 export default function Page() {
+  // State for navigation toggle
   const [toggleNav, setToggleNav] = useState<boolean>(false)
 
+  // State for form status
   const [loading, setLoading] = useState<boolean>(false)
+  const [fileUploadLoader, setFileUploadLoader] = useState<boolean>(false)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [msg, setMsg] = useState<string>('')
   const [alertType, setAlertType] = useState<string>('')
-  const [selectedTab, setSelectedTab] = useState<string>('Change Password')
+  const [alertTitle, setAlertTitle] = useState<string>('')
+  
+  // Available settings tabs
+  const settings = ['Update Bio', 'Change Password', 'Update Contact Details', 'Deactivate Account']
+  const [selectedTab, setSelectedTab] = useState<string>(settings[0])
 
-    const [passwordResetData, setPasswordResetData] = useState({
-        current_password: '',
-        new_password: '',
-        confirmPassword: '',
-    })
+  // State for image handling
 
-    const [contactData, setContactData] = useState({
-        phone: '',
-    })
+  // Form data states
+  const [passwordResetData, setPasswordResetData] = useState({
+      current_password: '',
+      new_password: '',
+      confirmPassword: '',
+  })
 
-    const [bioData, setBioData] = useState({
-        bio: '',
-        full_name:''
-    })
+  const [contactData, setContactData] = useState({
+      phone: '',
+  })
 
-    const handleBioInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setBioData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+  const [bioData, setBioData] = useState({
+      bio: '',
+      full_name:'',
+      address:'',
+      sex: ''
+  })
 
-    const handlePasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setPasswordResetData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+  useEffect(() => {
+    getUserProfile()
+  }, [])
 
-    const handleConctactInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setContactData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+  async function getUserProfile() {
+    try {
+      const storedUser = localStorage.getItem('user')
+      
+      if (!storedUser) {
+        console.error('No user found in localStorage')
+        return
+      }
+      
+      // Parse the stored user JSON string to an object
+      const currentUser: UserData = JSON.parse(storedUser)
+      
+      if (!currentUser.id) {
+        console.error('User ID not found')
+        return
+      }
+      
+      const response = await get(`/profile/user/${currentUser.id}`)
+      console.log(response);
+      
+      if (!response.success) {
+        throw new Error('Failed to fetch user profile')
+      }
+      
+      setBioData({
+        bio: response?.data?.bio || '',
+        full_name: response?.data?.full_name || '',
+        address: response?.data?.address || '',
+        sex: response?.data?.sex || ''
+      })
+      
+      setContactData({
+        phone: response?.data?.phone || ''
+      })
+      
+    } catch (error) {
+      console.error('Error fetching user profile:', error)
     }
+  }
+
+  const handleBioInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setBioData(prev => ({
+          ...prev,
+          [name]: value
+      }));
+  };
+
+  const handlePasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setPasswordResetData(prev => ({
+          ...prev,
+          [name]: value
+      }));
+  };
+
+  const handleConctactInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setContactData(prev => ({
+          ...prev,
+          [name]: value
+      }));
+  }
 
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
   }
 
   async function handlePasswordReset() {
-    setLoading(true)
-            // Validation
+    // Validation
     try {
       if(!passwordResetData.current_password || !passwordResetData.new_password || !passwordResetData.confirmPassword) {
           setMsg('Please fill in all fields.');
@@ -77,9 +148,12 @@ export default function Page() {
       }
       setLoading(true)
       console.log("Reset Password");
-      const response = await put('/dashboard/change-password', {current_password:passwordResetData.current_password, new_password:passwordResetData.new_password});
-      // router.push(`/register/${registerData.email}`)
-      setMsg('Password reset was successfull.');
+      const response = await put('/dashboard/change-password', {
+        current_password: passwordResetData.current_password, 
+        new_password: passwordResetData.new_password
+      });
+      
+      setMsg('Password reset was successful.');
       setAlertType('success');
       console.log(response);
     } catch (error: unknown) {
@@ -104,57 +178,55 @@ export default function Page() {
       }
       setLoading(true)
       console.log("Update Contact");
-      const response = await put('/dashboard/update-profile', {phone:contactData.phone});
-      // router.push(`/register/${registerData.email}`)
+      const response = await put('/dashboard/update-profile', {phone: contactData.phone});
+      
       if(response.success) {
         setMsg('Contact was successfully updated.');
         setAlertType('success');
       }
       console.log(response);
     }
-      catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          setMsg(error.response?.data?.message || 'An error occurred');
-        } else {
-          setMsg('An unexpected error occurred.');
-        }
-        setAlertType('error');
+    catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setMsg(error.response?.data?.message || 'An error occurred');
+      } else {
+        setMsg('An unexpected error occurred.');
+      }
+      setAlertType('error');
     } finally {
       setLoading(false);
     }
   }
 
   async function updateBio(){
-    // Validation
     try {
-      // if(!bio) {
-      //     setMsg('Please fill in all fields.');
-      //     setAlertType('error');
-      //     return
-      // }
       setLoading(true)
       console.log("Update Bio");
-      const response = await put('/dashboard/update-profile', {bio:bioData.bio});
-      // router.push(`/register/${registerData.email}`)
+      const response = await put('/dashboard/update-profile', {
+        bio: bioData.bio, 
+        full_name: bioData.full_name, 
+        address: bioData.address, 
+        sex: bioData.sex.toLocaleLowerCase()
+      });
+      
       if(response.success) {
         setMsg('Bio was successfully updated.');
         setAlertType('success');
       }
       console.log(response);
     }
-      catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          setMsg(error.response?.data?.message || 'An error occurred');
-        } else {
-          setMsg('An unexpected error occurred.');
-        }
-        setAlertType('error');
+    catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setMsg(error.response?.data?.message || 'An error occurred');
+      } else {
+        setMsg('An unexpected error occurred.');
+      }
+      setAlertType('error');
     } finally {
       setLoading(false);
     }
   }
 
-  const settings = ['Change Password', 'Update Bio', 'Update Contact Details', 'Deactivate Account']
 
   return (
     <div>
@@ -240,6 +312,14 @@ export default function Page() {
                   <div className='mt-8'>
                       <p>Full Name</p>
                       <input onChange={handleBioInputChange} value={bioData.full_name} name='full_name' type="text" placeholder='John' className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
+                  </div>
+                  <div className='mt-8'>
+                      <p>Sex</p>
+                      <input onChange={handleBioInputChange} value={bioData.sex} name='sex' type="text" placeholder='Male' className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
+                  </div>
+                  <div className='mt-8'>
+                      <p>Address</p>
+                      <input onChange={handleBioInputChange} value={bioData.address} name='address' type="text" placeholder='123 Abc Street' className='outline-none block border border-[#C2C5E1] h-[42px] rounded-[6px] w-full pl-2' />
                   </div>
                   <div className='mt-5'>
                       <p>Bio</p>
