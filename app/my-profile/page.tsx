@@ -11,6 +11,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import Cookies from 'js-cookie';
 import Alert from '../components/alert/Alert'
 import { CiImageOn } from 'react-icons/ci'
+import { AxiosError } from 'axios'
 
 interface UserData {
   id: string;
@@ -189,9 +190,13 @@ export default function Page() {
         setMsg("File upload wasn't successful");
         setAlertType('error');
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+          setMsg(error.response?.data?.message || 'Error uploading file');
+      } else {
+          setMsg('An unexpected error occurred.');
+      }
       setFileUploadLoader(false);
-      setMsg("Error uploading file");
       setAlertType('error');
     }
   }
