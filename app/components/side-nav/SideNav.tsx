@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LuLayoutGrid } from 'react-icons/lu';
 import { BsHouses } from 'react-icons/bs';
 import { usePathname } from 'next/navigation'; // For Next.js App Router
-import { IoSettingsOutline } from 'react-icons/io5';
+import { IoDocumentsOutline, IoSettingsOutline } from 'react-icons/io5';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 
 interface Toggle {
@@ -53,6 +53,12 @@ const SideNav = ({toggle}: ToggleProps) => {
             <div className="flex items-center gap-2">
               <HiOutlineUserCircle />
               <p className="">My Profile</p>
+            </div>
+          </Link>
+          <Link href='/my-documents' className={pathname === '/my-documents' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
+            <div className="flex items-center gap-2">
+              <IoDocumentsOutline />
+              <p className="">My Documents</p>
             </div>
           </Link>
           <Link href='/account-settings' className={pathname === '/account-settings' ? `flex items-center justify-between py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-between py-[12px]`}>
