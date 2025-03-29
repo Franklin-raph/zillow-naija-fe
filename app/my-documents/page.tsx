@@ -136,6 +136,18 @@ export default function Page() {
                 }
             </div>
           </section>
+          {
+              fileUploadLoader &&
+              <div style={{position:'fixed', width:'100%', left:'0', top:'0', zIndex:'9999', display:'flex', alignItems:'center', justifyContent:'center', height:'100vh', background:"rgba(18, 18, 18, 0.8)" }}>
+                  <div className="bg-white" style={{ borderRadius:'10px' }}>
+                      {/* <i className=' ri-close-fill block text-[1.2rem] text-end mt-[1rem] mr-[1rem] cursor-pointer'></i> */}
+                      <div className="flex items-center justify-between mt-[1rem] px-[2rem] mb-[2rem] flex-col" style={{ padding:'2rem', textAlign:'center' }} >
+                          <img src='./images/loader.gif' style={{ height:'40px', width:'40px', margin:'12px auto 30px' }} />
+                          <p className='text-gray-500 text-[15px] mb-2 text-center'>File Upload in progress, please do not refresh the page</p>
+                      </div>
+                  </div>
+              </div>
+          }
         </div>
       </div>
     </div>
