@@ -1,9 +1,11 @@
+"use client"
+
 import React from 'react'
 import { IoIosLogOut } from 'react-icons/io';
 import Link from 'next/link';
 import { LuLayoutGrid } from 'react-icons/lu';
 import { BsHouses } from 'react-icons/bs';
-import { usePathname } from 'next/navigation'; // For Next.js App Router
+import { usePathname, useRouter } from 'next/navigation'; // For Next.js App Router
 import { IoDocumentsOutline, IoSettingsOutline } from 'react-icons/io5';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 
@@ -18,6 +20,7 @@ interface ToggleProps {
 
 const SideNav = ({toggle}: ToggleProps) => {
   const pathname = usePathname(); // Get the current path using App Router
+  const router = useRouter()
   
   return (
     <div className={`bg-[#121212] scrollbar lg:w-[22%] w-[100%] h-[100vh] top-0 fixed overflow-y-auto py-5 overflow-x-hidden 
@@ -35,7 +38,7 @@ const SideNav = ({toggle}: ToggleProps) => {
             </p>
         </div>
         <div className="my-10 text-white w-full">
-          <p className='text-center text-[25px] mb-5 text-[#2E8B57]'>zillow9ja</p>
+          <p onClick={() => router.push('/')} className='text-center text-[25px] mb-5 text-[#2E8B57] cursor-pointer'>zillow9ja</p>
           {/* <p className="text-[12px] text-[#6F7975] mb-2">MAIN MENU</p> */}
           <Link href='/dashboard' className={pathname === '/dashboard' ? `flex items-start justify-start py-[12px] bg-[#2E8B57] pl-[15px] hover:bg-[#2E8B57] hover:text-white ml-2` :`hover:bg-[#2E8B57] ml-2 pl-[15px] flex items-center justify-start py-[12px]`}>
             <div className="flex items-center gap-2">
