@@ -6,73 +6,25 @@ import TopNav from '../components/top-nav/TopNav'
 import RecentlyPostedHomeCards from "../components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import { get } from '../utils/axiosHelpers';
 
+// Define a proper interface for your property objects
+interface Property {
+  title: string;
+  location: string;
+  price: string;
+  tag: string;
+  image: string;
+  details: string[];
+  // Add any other fields that might come from your API
+  [key: string]: any; // This allows for additional properties if needed
+}
 
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
-  const [properties, setProperties] = useState<any[]>([])
+  const [properties, setProperties] = useState<Property[]>([])
 
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
   }
-
-  // const properties = [
-  //   {
-  //     title: 'Portable 4 Bedroom Bungalow',
-  //     location: 'Adeniran Ogunsanya Surulere, Lagos',
-  //     price: '3,500,000',
-  //     tag: '5 mins Ago',
-  //     image: "./images/suggested-image.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Ekwulobia-Umunze Road Awka, Anambra',
-  //     price: '3,500,000',
-  //     tag: '10 mins Ago',
-  //     image: "./images/suggested-image-2.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Independence Layout Nza, Enugu',
-  //     price: '3,500,000',
-  //     tag: '8 mins Ago',
-  //     image: "./images/suggested-image-3.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Ekwulobia-Umunze Road Awka, Anambra',
-  //     price: '3,500,000',
-  //     tag: '5 mins Ago',
-  //     image: "./images/suggested-image.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Independence Layout Nza, Enugu',
-  //     price: '3,500,000',
-  //     tag: '25 mins Ago',
-  //     image: "./images/suggested-image-2.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Ekwulobia-Umunze Road Awka, Anambra',
-  //     price: '3,500,000',
-  //     tag: 'Yesterday',
-  //     image: "./images/suggested-image-3.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  //   {
-  //     title: 'Luxury 4 Bedroom Duplex',
-  //     location: 'Independence Layout Nza, Enugu',
-  //     price: '3,500,000',
-  //     tag: 'Last week',
-  //     image: "./images/suggested-image.png",
-  //     details: ['38eds', '28abrooms', '5z7n²'],
-  //   },
-  // ];
 
   const getMyListedProperties = async () => {
     // Call your API to get my listed properties
