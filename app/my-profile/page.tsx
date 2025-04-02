@@ -33,21 +33,21 @@ export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
   const [user, setUser] = useState<UserData | null>(null)
 
-    const [imagePreviewModal, setImagePreviewModal] = useState<boolean>(false)
-    const [imgSrc, setImgSrc] = useState<string>('')
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-    const [crop, setCrop] = useState<Crop>()
-    const [completedCrop, setCompletedCrop] = useState<Crop | null>(null)
-    const imgRef = useRef<HTMLImageElement | null>(null)
+  const [imagePreviewModal, setImagePreviewModal] = useState<boolean>(false)
+  const [imgSrc, setImgSrc] = useState<string>('')
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [crop, setCrop] = useState<Crop>()
+  const [completedCrop, setCompletedCrop] = useState<Crop | null>(null)
+  const imgRef = useRef<HTMLImageElement | null>(null)
 
-    // const [loading, setLoading] = useState<boolean>(false)
-    const [msg, setMsg] = useState<string>('')
-    const [alertType, setAlertType] = useState<string>('')
-    
-    // File upload context
+  // const [loading, setLoading] = useState<boolean>(false)
+  const [msg, setMsg] = useState<string>('')
+  const [alertType, setAlertType] = useState<string>('')
+  
+  // File upload context
 
-    const [fileUploadLoader, setFileUploadLoader] = useState<boolean>(false)
-    const token = Cookies.get('token')
+  const [fileUploadLoader, setFileUploadLoader] = useState<boolean>(false)
+  const token = Cookies.get('token')
 
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
