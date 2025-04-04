@@ -19,10 +19,11 @@ interface Toggle {
     // const [logoutModal, setLogoutModal] = useState<boolean>(false);
   
     return (
-      <div className='bg-[#121212] flex items-center justify-between w-[100%] py-[1.2rem] top-0 right-0 z-[99] px-5'>
-        <div className='flex items-center gap-5'>
+      <div className='border flex items-center justify-between w-[100%] py-[1.2rem] top-0 right-0 z-[99] px-5'>
+        <div className='flex items-start flex-col gap-1'>
           {/* Display the pageTitle */}
-          <h1 className='text-white text-xl font-semibold'>{pageTitle}</h1>
+          <h1 className='text-xl font-semibold'>{pageTitle}</h1>
+          <p>Welcome Back</p>
           {/* Other items in this div... */}
         </div>
         <div className='flex items-center gap-10'>
