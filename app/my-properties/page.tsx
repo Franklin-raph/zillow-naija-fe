@@ -14,8 +14,17 @@ interface Property {
   tag: string;
   image: string;
   details: string[];
-  // Add any other fields that might come from your API
-  [key: string]: any; // This allows for additional properties if needed
+  // Add other specific fields from your API
+  id?: string | number;
+  description?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
+  status?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  // Instead of [key: string]: any, use a more specific index signature if needed
+  [key: string]: string | number | string[] | boolean | undefined;
 }
 
 export default function Page() {
