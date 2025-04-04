@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import SideNav from '../components/side-nav/SideNav'
 import TopNav from '../components/top-nav/TopNav'
 import { LuHouse } from 'react-icons/lu';
-import { PiMoneyWavyLight } from 'react-icons/pi';
 import { BsHouseCheck } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
 
