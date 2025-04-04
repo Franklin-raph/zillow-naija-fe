@@ -53,7 +53,7 @@ export default function Page() {
             </div>
           </section>
         </div>
-        <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[80px] gap-5 flex ">
+        <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[80px] gap-5 flex items-start">
           <div className='w-[100%] lg:w-[60%] border rounded-[16px] p-4'>
             <p className=' font-[700] text-[20px]'>Recent Activities</p>
             <div className='mt-[0.5rem]'>
