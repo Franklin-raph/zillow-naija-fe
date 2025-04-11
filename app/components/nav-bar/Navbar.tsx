@@ -5,10 +5,12 @@ import React, { useState } from 'react'
 import { BiMenu } from 'react-icons/bi'
 import { IoCloseOutline } from 'react-icons/io5'
 import { MdMail } from 'react-icons/md'
+import Cookies from 'js-cookie';
 
 export default function Navbar() {
 
     const [mobileNavOpen, setMobileNavOpen] = useState(false)
+    const token = Cookies.get('token')
 
     const navLinks = [
         {
@@ -70,10 +72,17 @@ export default function Navbar() {
                 <BiMenu />
             </div>
         </div>
-        <div className='hidden sm:flex items-center gap-5'>
-            <MdMail />
-            <Link href="">Advertise</Link>
-            <Link className='bg-[#2E8B57] rounded-[4px] px-[10px] py-[2px] text-white' href="/login">Sign In</Link>
+        <div className='flex items-center gap-5'>
+            {
+                token ?
+                <div className='hidden sm:flex items-center gap-5'>
+                    <MdMail />
+                    <Link href="">Advertise</Link>
+                    <Link className='bg-[#2E8B57] rounded-[4px] px-[10px] py-[2px] text-white' href="/dashboard">Dashboard</Link>
+                </div>
+                :
+                <Link className='bg-[#2E8B57] rounded-[4px] px-[16px] py-[5px] text-white hidden sm:block' href="/sign-in">Sign In.</Link>
+            }
         </div>
     </div>
   )

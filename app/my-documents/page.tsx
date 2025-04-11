@@ -190,11 +190,11 @@ export default function Page() {
         <div className='mt-8'>
           <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[80px]">
             {/* <p className="font-[#212121] font-[700] md:text-[25px] text-[18px] mb-3">My Documents</p> */}
-            <div className='flex items-center gap-4 w-full'>
+            <div className='flex items-center gap-4 w-full flex-col md:flex-row'>
               <div className='relative w-full'>
                   <div className='border-dashed border-[#98A2B3] border-2 rounded-[4px] p-[4rem] flex flex-col items-center justify-center mt-5 w-full'>
                       <IoCloudUploadOutline className='text-[#98A2B3] text-[50px]' />
-                      <p className='text-text-color font-[600] mt-5'>Click to upload front of document <span className='font-[400] text-[#475367] hidden'>or drag and drop</span> </p>
+                      <p className='text-center font-[600] mt-5'>Click to upload front of document <span className='font-[400] text-[#475367] hidden'>or drag and drop</span> </p>
                       <p className='text-[#98A2B3] text-center'>Pdf, png, jpeg, jpg. (max. 16mb)</p>
                     <input
                       type="file"
@@ -210,7 +210,7 @@ export default function Page() {
               <div className='relative w-full'>
                   <div className='border-dashed border-[#98A2B3] border-2 rounded-[4px] p-[4rem] flex flex-col items-center justify-center mt-5 w-full'>
                       <IoCloudUploadOutline className='text-[#98A2B3] text-[50px]' />
-                      <p className='text-text-color font-[600] mt-5'>Click to upload back of document <span className='font-[400] text-[#475367] hidden'>or drag and drop</span> </p>
+                      <p className='text-center font-[600] mt-5'>Click to upload back of document <span className='font-[400] text-[#475367] hidden'>or drag and drop</span> </p>
                       <p className='text-[#98A2B3] text-center'>Pdf, png, jpeg, jpg. (max. 16mb)</p>
                     <input
                       type="file"
