@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/nav-bar/Navbar";
 import { BiHomeHeart } from "react-icons/bi";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -26,6 +26,7 @@ import { RxMinus, RxPlus } from "react-icons/rx";
 import { FaRegMessage } from "react-icons/fa6";
 import Footer from "./components/footer/Footer";
 import { useRouter } from "next/navigation";
+import { get } from "./utils/axiosHelpers";
 
 
 export default function Home() {
@@ -145,6 +146,15 @@ export default function Home() {
       icon: <FaRegMessage />
     }
   ];
+
+  async function getListings() {
+    const res = await get('/listings/')
+    console.log(res)
+  }
+
+  useEffect(() => {
+    getListings()
+  },[])
 
   return (
     <div>

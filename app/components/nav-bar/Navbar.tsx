@@ -17,18 +17,18 @@ export default function Navbar() {
             label: "Buy",
             link: "/buy",
         },
-        {
-            label: "Rent",
-            link: "/",
-        },
+        // {
+        //     label: "Rent",
+        //     link: "/",
+        // },
         {
             label: "Sell",
             link: "/sell",
         },
-        {
-            label: "Short Let",
-            link: "/",
-        },
+        // {
+        //     label: "Short Let",
+        //     link: "/",
+        // },
         {
             label: "Find an Agent",
             link: "/find-an-agent",
@@ -38,7 +38,7 @@ export default function Navbar() {
   return (
     <div className='flex items-center justify-between max-w-[1600px] mx-auto md:px-[4rem] px-[1rem] md:py-8 py-6 border-b'>
         <div className='flex items-center gap-8 justify-between sm:justify-normal w-full sm:w-[80%]'>
-            <Link className='text-[#22AC00] font-[700] mr-6' href="/">Zillow9ja</Link>
+            <Link className='text-[#22AC00] font-[700] mr-6 cursor-pointer' href="/">Zillow9ja</Link>
             <ul className='hidden sm:flex items-center gap-8'>
                 {
                     navLinks.map((link, index) => (
@@ -81,7 +81,7 @@ export default function Navbar() {
                     <Link className='bg-[#2E8B57] rounded-[4px] px-[10px] py-[2px] text-white' href="/dashboard">Dashboard</Link>
                 </div>
                 :
-                <Link className='bg-[#2E8B57] rounded-[4px] px-[16px] py-[5px] text-white hidden sm:block' href="/sign-in">Sign In.</Link>
+                <Link className='bg-[#2E8B57] rounded-[4px] px-[16px] py-[5px] text-white hidden sm:block' href="/login">Sign In.</Link>
             }
         </div>
     </div>

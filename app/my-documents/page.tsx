@@ -106,7 +106,7 @@ export default function Page() {
     
     
     try {
-      const res = await fetch(`https://zillow9jabe.onrender.com/media/upload`, {
+      const res = await fetch(`https://zillow9ja.yamltech.com/media/upload`, {
         method: "POST",
         body: formData,
         headers : {

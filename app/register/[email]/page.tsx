@@ -28,9 +28,9 @@ export default function Page() {
 
             setAlertType('success')
             setMsg('Account verified successfully!')
-            Cookies.set('token', res.data.token);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            router.push('/complete-registeration')
+            // Cookies.set('token', res.data.token);
+            // localStorage.setItem('user', JSON.stringify(res.data.user));
+            router.push('/login')
             
         } catch (error: unknown) {
             if (error instanceof AxiosError) {
