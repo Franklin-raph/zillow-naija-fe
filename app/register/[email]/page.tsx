@@ -23,7 +23,7 @@ export default function Page() {
     async function verifyAccount(){
         try {
             setIsLoading(true)
-            const res = await post('/verify-token', {token:otp, email:decodeURIComponent(email as string)})
+            const res = await post('/activate-account', {token:otp, email:decodeURIComponent(email as string)})
             console.log("Response =========== ", res);
 
             setAlertType('success')

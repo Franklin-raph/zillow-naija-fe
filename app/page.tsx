@@ -33,65 +33,8 @@ export default function Home() {
   const tabs = ["Buy", "Rent", "Sell"];
   const [selectedTab, setSelectedTab] = useState<string>(tabs[0]);
   const router = useRouter()
-
-  const properties = [
-    {
-      title: 'Portable 4 Bedroom Bungalow',
-      location: 'Adeniran Ogunsanya Surulere, Lagos',
-      price: '3,500,000',
-      tag: '5 mins Ago',
-      image: "./images/suggested-image.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '3,500,000',
-      tag: '10 mins Ago',
-      image: "./images/suggested-image-2.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Independence Layout Nza, Enugu',
-      price: '3,500,000',
-      tag: '8 mins Ago',
-      image: "./images/suggested-image-3.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '3,500,000',
-      tag: '5 mins Ago',
-      image: "./images/suggested-image.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Independence Layout Nza, Enugu',
-      price: '3,500,000',
-      tag: '25 mins Ago',
-      image: "./images/suggested-image-2.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Ekwulobia-Umunze Road Awka, Anambra',
-      price: '3,500,000',
-      tag: 'Yesterday',
-      image: "./images/suggested-image-3.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-    {
-      title: 'Luxury 4 Bedroom Duplex',
-      location: 'Independence Layout Nza, Enugu',
-      price: '3,500,000',
-      tag: 'Last week',
-      image: "./images/suggested-image.png",
-      details: ['38eds', '28abrooms', '5z7n²'],
-    },
-  ];
+  const [listings, setListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [aboutSection, setAboutSection] = useState({
     first: true,
@@ -148,8 +91,16 @@ export default function Home() {
   ];
 
   async function getListings() {
-    const res = await get('/listings/')
-    console.log(res)
+    setIsLoading(true);
+    try {
+      const res = await get('/listings/');
+      setListings(res.results.slice(0, 6));
+    } catch (err) {
+      console.error('Error fetching listings:', err);
+      setListings([]); // Set empty array on error to avoid undefined issues
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -241,13 +192,12 @@ export default function Home() {
         <p className="font-[#212121] font-[700] md:text-[25px] text-[18px]">Suggested Homes For You</p>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 mt-3">
           {
-            // Mock data for home cards
-            Array.from({ length: 3 }, (_, index) => (
-              <SuggestedHomeCard key={index} />
+            listings?.map((listing, index) => (
+              <SuggestedHomeCard key={index} listing={listing} />
             ))
           }
         </div>
-        <div className="flex justify-center items-center mt-5 cursor-pointer group text-[17px]">
+        <div className="flex justify-center items-center mt-5 cursor-pointer group text-[17px]" onClick={() => router.push('/buy')}>
           <p className="px-[5px] py-[2px] text-[#212121]">View all suggested homes</p>
           <GoArrowRight className="transition-transform duration-300 group-hover:translate-x-3" />
         </div>
@@ -289,11 +239,19 @@ export default function Home() {
             // '--swiper-pagination-top': '353px', // Move pagination down
           } as React.CSSProperties}
         >
-          {properties.map((property, index) => (
+          {
+            listings?.map((listing, index) => (
+              <SwiperSlide key={index}>
+                <RecentlyPostedHomeCards listing={listing}/>
+              </SwiperSlide>
+                // <SuggestedHomeCard key={index} listing={listing} />
+            ))
+          }
+          {/* {properties.map((property, index) => (
             <SwiperSlide key={index}>
               <RecentlyPostedHomeCards property={property}/>
             </SwiperSlide>
-          ))}
+          ))} */}
         </Swiper>
       </section>
 
