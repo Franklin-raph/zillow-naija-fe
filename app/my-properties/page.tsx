@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import SideNav from '../components/side-nav/SideNav'
 import TopNav from '../components/top-nav/TopNav'
-import RecentlyPostedHomeCards from "../components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import { get } from '../utils/axiosHelpers';
 
 // Define a proper interface for your property objects

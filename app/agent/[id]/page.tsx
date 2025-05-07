@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/nav-bar/Navbar'
 import Footer from '../../components/footer/Footer'
 import { CiLocationOn } from 'react-icons/ci';
-import { useRouter } from 'next/navigation';
 import { get } from '@/app/utils/axiosHelpers';
 import SuggestedHomeCard from '@/app/components/suggested-home-card/SuggestedHomeCard';
 
