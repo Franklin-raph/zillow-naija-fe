@@ -1,45 +1,34 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/nav-bar/Navbar'
 import Footer from '../../components/footer/Footer'
-import FilterHomeCards from '../../components/filter-home-cards/FilterHomeCards';
 import { CiLocationOn } from 'react-icons/ci';
+import { useRouter } from 'next/navigation';
+import { get } from '@/app/utils/axiosHelpers';
+import SuggestedHomeCard from '@/app/components/suggested-home-card/SuggestedHomeCard';
 
 export default function Page() {
+    
+    const [listings, setListings] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const properties = [
-        {
-          title: 'Portable 4 Bedroom Bungalow',
-          location: 'Adeniran Ogunsanya Surulere, Lagos',
-          price: '3,500,000',
-          tag: '5 mins Ago',
-          image: "../images/suggested-image.png",
-          details: ['38eds', '28abrooms', '5z7n²'],
-        },
-        {
-          title: 'Luxury 4 Bedroom Duplex',
-          location: 'Ekwulobia-Umunze Road Awka, Anambra',
-          price: '3,500,000',
-          tag: '10 mins Ago',
-          image: "../images/suggested-image-2.png",
-          details: ['38eds', '28abrooms', '5z7n²'],
-        },
-        {
-          title: 'Luxury 4 Bedroom Duplex',
-          location: 'Independence Layout Nza, Enugu',
-          price: '3,500,000',
-          tag: '8 mins Ago',
-          image: "../images/suggested-image-3.png",
-          details: ['38eds', '28abrooms', '5z7n²'],
-        },
-        {
-          title: 'Luxury 4 Bedroom Duplex',
-          location: 'Ekwulobia-Umunze Road Awka, Anambra',
-          price: '3,500,000',
-          tag: '5 mins Ago',
-          image: "../images/suggested-image.png",
-          details: ['38eds', '28abrooms', '5z7n²'],
-        }
-      ];
+    async function getListings() {
+    setIsLoading(true);
+    try {
+        const res = await get('/listings/');
+        setListings(res.results.slice(0, 6));
+    } catch (err) {
+        console.error('Error fetching listings:', err);
+        setListings([]); // Set empty array on error to avoid undefined issues
+    } finally {
+        setIsLoading(false);
+    }
+    }
+
+    useEffect(() => {
+        getListings()
+    },[])
 
   return (
     <div>
@@ -66,15 +55,20 @@ export default function Page() {
                         <p className='font-[600] md:text-[28px] text-[20px] mb-4'>Chinasa Newest Listings</p>
                         <div className='flex justify-center items-start pb-8 lg:flex-row flex-col-reverse'>
                             <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 content-center gap-3'>
-                                {properties.map((property, index) => (
-                                    <FilterHomeCards key={index} property={property}/>
-                                ))}
+                                {
+                                    listings?.map((listing, index) => (
+                                    <SuggestedHomeCard key={index} listing={listing} />
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {
+            isLoading && <p className='text-[1px]'>load...</p>
+        }
         <Footer />
     </div>
   )

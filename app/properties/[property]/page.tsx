@@ -1,7 +1,7 @@
 "use client"
 
 import Navbar from '@/app/components/nav-bar/Navbar'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsSquare } from 'react-icons/bs'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -15,8 +15,29 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import RecentlyPostedHomeCards from "../../components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import Footer from '@/app/components/footer/Footer';
 import { BiHeart, BiShare } from 'react-icons/bi';
+import { get } from '@/app/utils/axiosHelpers';
 
 export default function Page() {
+
+    const [listings, setListings] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function getListings() {
+    setIsLoading(true);
+    try {
+        const res = await get('/listings/');
+        setListings(res.results.slice(0, 6));
+    } catch (err) {
+        console.error('Error fetching listings:', err);
+        setListings([]); // Set empty array on error to avoid undefined issues
+    } finally {
+        setIsLoading(false);
+    }
+    }
+
+    useEffect(() => {
+    getListings()
+    },[])
 
     const properties = [
         {
@@ -171,14 +192,19 @@ export default function Page() {
                         // '--swiper-pagination-top': '353px', // Move pagination down
                     } as React.CSSProperties}
                     >
-                    {properties.map((property, index) => (
+                    {
+                        listings?.map((listing, index) => (
                         <SwiperSlide key={index}>
-                            <RecentlyPostedHomeCards property={property}/>
+                            <RecentlyPostedHomeCards listing={listing}/>
                         </SwiperSlide>
-                    ))}
+                        ))
+                    }
                 </Swiper>
             </section>
         </div>
+        {
+            isLoading && <p className='text-[1px]'>load...</p>
+        }
         <Footer />
     </div>
   )

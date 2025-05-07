@@ -244,14 +244,8 @@ export default function Home() {
               <SwiperSlide key={index}>
                 <RecentlyPostedHomeCards listing={listing}/>
               </SwiperSlide>
-                // <SuggestedHomeCard key={index} listing={listing} />
             ))
           }
-          {/* {properties.map((property, index) => (
-            <SwiperSlide key={index}>
-              <RecentlyPostedHomeCards property={property}/>
-            </SwiperSlide>
-          ))} */}
         </Swiper>
       </section>
 
