@@ -20,8 +20,6 @@ interface HousePost {
   cover_image?: {
     media: string;
   };
-  // Add other properties as needed
-  [key: string]: any; // For any other properties that might exist
 }
 
 export default function Page() {
