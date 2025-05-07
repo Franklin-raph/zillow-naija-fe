@@ -508,7 +508,9 @@ export default function Home() {
         </div>
         <img src="./images/mockup-2.svg" className="w-[400px] mx-auto" alt="" />
       </section>
-
+      {
+        isLoading && <p className="text-[1px]">Loading</p>
+      }
       <Footer />
     </div>
   );

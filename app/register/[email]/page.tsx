@@ -8,7 +8,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { post } from '../../utils/axiosHelpers'
 import BtnLoader from '../../components/btnLoader/BtnLoader'
 import Alert from '../../components/alert/Alert'
-import Cookies from 'js-cookie';
 import { AxiosError } from 'axios'
 
 export default function Page() {
