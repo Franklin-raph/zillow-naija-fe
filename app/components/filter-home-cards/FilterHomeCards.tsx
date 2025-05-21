@@ -61,9 +61,9 @@ export default function FilterHomeCards({ listing }: { listing: HousePost }) {
         className='md:h-[250px] h-[150px] object-cover w-full rounded-t-[20px]'
       />
       <div className='py-4 md:px-4 px-2'>
-        <p className='font-[600] md:text-[18px] text-[14px]'>{title}</p>
-        <p className='text-[14px] mt-1 mb-3'>{address}</p>
-        <p className='font-[700] text-[#2E8B57] md:text-[20px] text-[18px] flex items-center'>
+        <p className='font-[600] md:text-[18px] text-[12px]'>{title}</p>
+        <p className='text-[12px] sm:text-[14px] mt-1 mb-3'>{address}</p>
+        <p className='font-[700] text-[#2E8B57] md:text-[20px] text-[15px] flex items-center'>
           <TbCurrencyNaira /> {formattedPrice}
         </p>
         <div className='sm:flex hidden items-left md:gap-4 mt-2 pb-4 text-[13px]'>

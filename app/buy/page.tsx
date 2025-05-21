@@ -119,8 +119,8 @@ export default function Page() {
                 </div>
             </div>
         </div>
-        <div className='flex justify-center items-start pb-8 px-[2rem] lg:flex-row flex-col-reverse'>
-            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 content-center gap-5'>
+        <div className='flex justify-center items-start pb-8 md:px-[2rem] px-[12px] lg:flex-row flex-col-reverse'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 content-center md:gap-5 gap-2'>
                 {filteredListings.map((listing, index) => {
                     if (filteredListings.length === index + 1) {
                         // Add ref to the last element

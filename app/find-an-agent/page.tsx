@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/nav-bar/Navbar'
 import Footer from '../components/footer/Footer'
 import { CiLocationOn, CiMail } from 'react-icons/ci'
@@ -18,6 +18,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import TopRatedAgents from '../components/top-rated-agents/TopRatedAgents'
 import { useRouter } from 'next/navigation'
+import { get } from '../utils/axiosHelpers'
 
 export default function Page() {
 
@@ -78,6 +79,28 @@ export default function Page() {
   const [searchParams, setSearchParams] = useState<string | null>(null);
 
   const router = useRouter()
+
+  const [agents, setAgents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function getAgents() {
+      setIsLoading(true);
+      try {
+          const res = await get('/ratings/top-rated-agents/retrieve');
+          console.log(res);
+          
+          setAgents(res.results);
+      } catch (err) {
+          console.error('Error fetching agents:', err);
+          setAgents([]); // Set empty array on error to avoid undefined issues
+      } finally {
+          setIsLoading(false);
+      }
+  }
+
+  useEffect(() => {
+      getAgents()
+  },[])
 
   return (
     <div>

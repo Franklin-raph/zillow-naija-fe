@@ -9,24 +9,26 @@ import SuggestedHomeCard from '@/app/components/suggested-home-card/SuggestedHom
 
 export default function Page() {
     
-    const [listings, setListings] = useState([]);
+    const [agents, setAgents] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    async function getListings() {
-    setIsLoading(true);
-    try {
-        const res = await get('/listings/');
-        setListings(res.results.slice(0, 6));
-    } catch (err) {
-        console.error('Error fetching listings:', err);
-        setListings([]); // Set empty array on error to avoid undefined issues
-    } finally {
-        setIsLoading(false);
-    }
+    async function getAgents() {
+        setIsLoading(true);
+        try {
+            const res = await get('/ratings/top-rated-agents/retrieve/');
+            console.log(res);
+            
+            setAgents(res.results);
+        } catch (err) {
+            console.error('Error fetching agents:', err);
+            setAgents([]); // Set empty array on error to avoid undefined issues
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     useEffect(() => {
-        getListings()
+        getAgents()
     },[])
 
   return (
@@ -55,8 +57,8 @@ export default function Page() {
                         <div className='flex justify-center items-start pb-8 lg:flex-row flex-col-reverse'>
                             <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 content-center gap-3'>
                                 {
-                                    listings?.map((listing, index) => (
-                                    <SuggestedHomeCard key={index} listing={listing} />
+                                    agents?.map((agent, index) => (
+                                    <SuggestedHomeCard key={index} listing={agent} />
                                     ))
                                 }
                             </div>
