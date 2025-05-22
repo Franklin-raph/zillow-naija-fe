@@ -11,6 +11,10 @@ import { GiMoneyStack } from 'react-icons/gi';
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
   const percentageSold = 75; // Example percentage for sold properties
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  console.log(user, 'user');
+  
 
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
@@ -28,7 +32,7 @@ export default function Page() {
             toggleNav: toggleNav,
             setToggleNav: handleToggleNav
           }}
-          pageTitle={'Hi, Sarah'}
+          pageTitle={`Hi, ${user.full_name ? user.full_name : "Guest"}`}
         />
         <div className='mt-8'>
           <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[40px]">
@@ -52,7 +56,7 @@ export default function Page() {
             </div>
           </section>
         </div>
-        <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[80px] gap-5 flex items-start">
+        <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[80px] gap-5 flex flex-col md:flex-row items-start">
           <div className='w-[100%] lg:w-[60%] border rounded-[16px] p-4'>
             <p className=' font-[700] text-[20px]'>Recent Activities</p>
             <div className='mt-[0.5rem]'>
@@ -69,7 +73,7 @@ export default function Page() {
           <div className='w-[100%] lg:w-[40%] flex flex-col gap-5'>
             <div className='w-full border rounded-[16px] p-4'>
               <div className="bg-white rounded-lg max-w-sm mx-auto">
-                <h2 className="font-bold text-gray-800 mb-6 text-[18px]">Property Sales Progress</h2>
+                <h2 className="font-bold text-gray-800 mb-6 text-[18px] text-center">Property Sales Progress</h2>
                 
                 <div className="relative w-48 h-48 mx-auto mb-8">
                   {/* Yellow bottom semi-circle (remaining properties) */}

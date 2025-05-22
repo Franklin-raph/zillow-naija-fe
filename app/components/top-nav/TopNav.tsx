@@ -1,9 +1,12 @@
 
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosLogOut } from "react-icons/io";
 import { IoMenuOutline } from "react-icons/io5";
+import LogOutModal from '../logout-modal/LogOutModal';
+
+  // Define the interface for the toggle state
 
 interface Toggle {
     toggleNav: boolean;
@@ -16,6 +19,8 @@ interface Toggle {
   }
   
   const TopNav = ({ toggle, pageTitle }: TopNavProps) => {
+
+    const [logoutModal, setLogoutModal] = useState<boolean>(false);
     // const [logoutModal, setLogoutModal] = useState<boolean>(false);
   
     return (
@@ -29,17 +34,20 @@ interface Toggle {
         <div className='flex items-center gap-10'>
           {/* Search and logout elements... */}
           <div onClick={() => {
-            // setLogoutModal(true)
+            setLogoutModal(true)
           }} className='items-center gap-3 bg-[#2DB857] text-white py-[9px] px-[16px] rounded-[4px] cursor-pointer hidden lg:flex'>
             <IoIosLogOut fontSize={"20px"}/>
             <p>Logout</p>
           </div>
           <IoMenuOutline
-            className='text-white text-[30px] cursor-pointer block lg:hidden' 
+            className='text-black text-[30px] cursor-pointer block lg:hidden' 
             onClick={() => toggle.setToggleNav(!toggle.toggleNav)} // Toggle nav when menu icon is clicked
           />
         </div>
         {/* Logout modal... */}
+        {
+          logoutModal && <LogOutModal setLogoutModal={setLogoutModal}/>
+        }
       </div>
     );
   };
