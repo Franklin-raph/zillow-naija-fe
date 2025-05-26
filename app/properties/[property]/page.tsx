@@ -49,7 +49,7 @@ interface PropertyInfo {
 
 export default function Page() {
 
-    const [listings, setListings] = useState<any[]>([]);
+    const [listings, setListings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [propertyInfo, setPropertyInfo] = useState<PropertyInfo | null>(null);
     const [hasHydrated, setHasHydrated] = useState(false);
@@ -288,7 +288,7 @@ export default function Page() {
                             } as React.CSSProperties}
                             >
                             {listings.map((listing, index) => (
-                                <SwiperSlide key={listing.id || index}>
+                                <SwiperSlide key={index}>
                                     <RecentlyPostedHomeCards listing={listing}/>
                                 </SwiperSlide>
                             ))}
