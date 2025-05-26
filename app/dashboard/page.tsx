@@ -11,11 +11,7 @@ import { GiMoneyStack } from 'react-icons/gi';
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
   const percentageSold = 75; // Example percentage for sold properties
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-
-  console.log(user, 'user');
   
-
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
   }
@@ -32,7 +28,7 @@ export default function Page() {
             toggleNav: toggleNav,
             setToggleNav: handleToggleNav
           }}
-          pageTitle={`Hi, ${user.full_name ? user.full_name : "Guest"}`}
+          pageTitle={`Hi, "Guest"}`}
         />
         <div className='mt-8'>
           <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[40px]">
