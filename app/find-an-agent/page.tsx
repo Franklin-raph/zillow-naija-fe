@@ -7,6 +7,7 @@ import { CiLocationOn, CiMail } from 'react-icons/ci'
 import { BiSearchAlt } from 'react-icons/bi'
 import { BsStarFill } from 'react-icons/bs'
 import { RxMinus, RxPlus } from 'react-icons/rx'
+import AgentCardSkeleton from '../components/agent-card-skeleton/AgentCardSkeleton';
 
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -19,6 +20,19 @@ import 'swiper/css/effect-fade';
 import TopRatedAgents from '../components/top-rated-agents/TopRatedAgents'
 import { useRouter } from 'next/navigation'
 import { get } from '../utils/axiosHelpers'
+
+type Agent = {
+  id: string;
+  image?: string;
+  full_name: string;
+  profile_image?: {
+    media: string;
+  };
+  location: string;
+  email: string;
+  created_at: string;
+  average_rating?: number;
+}
 
 export default function Page() {
 
@@ -77,10 +91,11 @@ export default function Page() {
   ]
 
   const [searchParams, setSearchParams] = useState<string | null>(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
   const router = useRouter()
 
-  const [agents, setAgents] = useState([]);
+  const [agents, setAgents] = useState<Agent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function getAgents() {
@@ -89,7 +104,7 @@ export default function Page() {
           const res = await get('/ratings/top-rated-agents/retrieve');
           console.log(res);
           
-          setAgents(res.results);
+          setAgents(res.results || []);
       } catch (err) {
           console.error('Error fetching agents:', err);
           setAgents([]); // Set empty array on error to avoid undefined issues
@@ -99,8 +114,14 @@ export default function Page() {
   }
 
   useEffect(() => {
-      getAgents()
-  },[])
+    setHasHydrated(true);
+    getAgents();
+  }, []);
+
+  // Don't render until hydrated to prevent hydration mismatch
+  if (!hasHydrated) {
+    return null;
+  }
 
   return (
     <div>
@@ -134,144 +155,75 @@ export default function Page() {
             </div>
             <img src="./images/sold.png" alt="" className='w-full h-full object-cover'/>
         </div>
+        
         <div className='mt-[7rem] md:max-w-[1600px] w-[95%] mx-auto lg:px-[2rem]'>
           <div className='w-full'>
             <p className='text-center font-bold md:text-[30px] text-[20px] text-[#212121]'>Real Estate Agents For You</p>
             <p className='text-center md:text-[16px] text-[14px] text-[#212121]'>Find the Perfect Agent For Your Property</p>
 
-            <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7 mt-[50px]'>
-              <div>
-                <img src="./images/user1.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
+            {/* Loading state */}
+            {isLoading && (
+              <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7 mt-[50px]'>
+                {[1,2,3,4].map((_, index) => (
+                  <AgentCardSkeleton key={index} />
+                ))}
               </div>
-              <div>
-                <img src="./images/user2.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
+            )}
+
+            {/* No agents found state */}
+            {!isLoading && agents.length === 0 && (
+              <div className='text-center mt-[50px]'>
+                <p className='text-[#777575] text-[16px] md:text-[18px]'>No agents found</p>
               </div>
-              <div>
-                <img src="./images/user3.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
+            )}
+
+            {/* Agents grid - only show when not loading and has agents */}
+            {!isLoading && agents.length > 0 && (
+              <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7 mt-[50px]'>
+                {agents.map((agent, index) => (
+                  <div key={agent.id || index} className='relative'>
+                    <img 
+                      src={agent?.profile_image?.media || '/images/default-avatar.png'} 
+                      className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2 object-cover' 
+                      alt={`${agent.full_name}'s profile`} 
+                    />
+                    <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
+                      <p className='text-[#212121] text-[20px] font-[500]'>{agent.full_name}</p>
+                      <p className='text-[#212121] text-[14px] flex items-center gap-2'> 
+                        <CiLocationOn /> {agent.location}
+                      </p>
+                      <p className='text-[#212121] text-[14px] flex items-center gap-2'> 
+                        <CiMail /> {agent.email}
+                      </p>
+                      <p className='text-[#777575] text-[12px] mt-3'>
+                        Member since {new Date(agent.created_at).toLocaleDateString()}
+                      </p>
+                      <div className='flex items-center justify-between text-[12px] mt-3'>
+                        <div className='flex items-center gap-2'>
+                          <p>{agent.average_rating || 'N/A'}</p>
+                          <BsStarFill className='text-[#F8BD00]'/>
+                        </div>
+                        <button 
+                          className='text-[#2E8B57] hover:underline' 
+                          onClick={() => router.push(`/agent/${agent.id}`)}
+                        >
+                          View managed properties
+                        </button>
+                      </div>
                     </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
                   </div>
-                </div>
+                ))}
               </div>
-              <div>
-                <img src="./images/user2.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
+            )}
+
+            {/* Show "View more agents" button only when there are agents */}
+            {!isLoading && agents.length > 0 && (
+              <div className='flex justify-center mt-[3rem]'>
+                <button className='text-[#2E8B57] border border-[#2E8B57] text-[14px] px-10 py-2 rounded-md hover:bg-[#2E8B57] hover:text-white transition-colors'>
+                  View more agents
+                </button>
               </div>
-              <div>
-                <img src="./images/user1.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <img src="./images/user2.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <img src="./images/user3.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <img src="./images/user2.png" className='w-[100px] h-[100px] rounded-full mb-[-45px] ml-2' alt="" />
-                <div className='shadow-lg rounded-lg px-4 pb-4 pt-[3rem] border'>
-                  <p className='text-[#212121] text-[20px] font-[500]'>Chiamaka Okoro Sandra</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiLocationOn /> Lagos Island, Lagos</p>
-                  <p className='text-[#212121] text-[14px] flex items-center gap-2'> <CiMail /> chiamakasandra@gmail.com</p>
-                  <p className='text-[#777575] text-[12px] mt-3'>Member since Jan. 2025</p>
-                  <div className='flex items-center justify-between text-[12px] mt-3'>
-                    <div className='flex items-center gap-2'>
-                      <p>3.0</p>
-                      <BsStarFill className='text-[#F8BD00]'/>
-                    </div>
-                    <button className='text-[#2E8B57]' onClick={() => router.push('/agent/123')}>View managed properties</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='flex justify-center mt-[3rem]'>
-              <button className='text-[#2E8B57] border border-[#2E8B57] text-[14px] px-10 py-2 rounded-md'>View more agents</button>
-            </div>
+            )}
           </div>
         </div>
 
@@ -307,12 +259,11 @@ export default function Page() {
             className="mySwiper md:h-[350px] h-[265px]"
             loop={true}
             style={{
-              '--swiper-pagination-color': '#22AC00', // Active bullet color
-              '--swiper-pagination-bullet-inactive-color': '#999999', // Inactive bullet color
-              '--swiper-pagination-bullet-inactive-opacity': '0.5', // Inactive bullet opacity
-              '--swiper-pagination-bullet-size': '8px', // Bullet size
-              '--swiper-pagination-bullet-horizontal-gap': '6px', // Space between bullets
-              // '--swiper-pagination-top': '353px', // Move pagination down
+              '--swiper-pagination-color': '#22AC00',
+              '--swiper-pagination-bullet-inactive-color': '#999999',
+              '--swiper-pagination-bullet-inactive-opacity': '0.5',
+              '--swiper-pagination-bullet-size': '8px',
+              '--swiper-pagination-bullet-horizontal-gap': '6px',
             } as React.CSSProperties}
           >
           {topRatedAgents.map((agent, index) => (
@@ -356,7 +307,9 @@ export default function Page() {
           <div className='md:px-[4rem] px-[1.5rem] py-[4rem] md:py-0'>
             <p className='font-bold md:text-[30px] text-[20px] mb-3'>Ready to make your next move?</p>
             <p className='text-[14px] md:text-[16px]'>Find the perfect agent to turn your property dreams into reality - with expert guidance, every step of the way!</p>
-            <button className='bg-white text-[#13544E] text-[14px] md:text-[16px] py-[6px] mt-3 px-4 rounded-[6px]'>Search for agents</button>
+            <button className='bg-white text-[#13544E] text-[14px] md:text-[16px] py-[6px] mt-3 px-4 rounded-[6px] hover:bg-gray-100 transition-colors'>
+              Search for agents
+            </button>
           </div>
           <img src="./images/find-agent-2.png" alt="" className='md:w-[52%] h-full object-cover rounded-l-[30px]'/>
         </div>

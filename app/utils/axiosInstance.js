@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
             if (error.response.status === 401 || error.response.status === 403) {
                 // Unauthorized, clear the token and redirect to login page
                 console.log('Unauthorized! Logging out...');
-                localStorage.removeItem('token');
+                localStorage.clear();
                 Cookies.remove('token');
                 // window.location.href = '/login';
             }

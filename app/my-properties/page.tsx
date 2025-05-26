@@ -39,6 +39,7 @@ interface ApiResponse {
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
   const [properties, setProperties] = useState<PropertyItem[]>([])
+  const  [loading, setLoading] = useState<boolean>(true)
   const [pagination, setPagination] = useState({
     count: 0,
     current: 1,
@@ -53,6 +54,7 @@ export default function Page() {
 
   const getMyListedProperties = async () => {
     try {
+      setLoading(true)
       // Call your API to get my listed properties
       const response = await get('/listings/my_listings/') as ApiResponse
       
@@ -72,6 +74,8 @@ export default function Page() {
     } catch (error) {
       console.error("Error fetching properties:", error)
       setProperties([])
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -110,8 +114,13 @@ export default function Page() {
               <p className="font-[#212121] font-[700] md:text-[25px] text-[18px] mb-3">Properties Posted</p>
               <p>Total: {pagination.count}</p>
             </div>
+            {loading && (
+              <div className="flex justify-center py-4">
+                <div className="loader border-t-4 border-b-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
+              </div>
+            )}
             {
-              properties.length === 0 && (
+              !loading && properties.length === 0 && (
                 <div className="text-center text-[18px] font-[500]">No properties found.</div>
               )
             }

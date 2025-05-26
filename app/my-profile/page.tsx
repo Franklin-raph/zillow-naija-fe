@@ -156,9 +156,6 @@ export default function Page() {
     const formData = new FormData();
     formData.append('media', file);
     formData.append('media_type', 'photo');
-
-    console.log(`Bearer ${token}`);
-    
     
     try {
       const res = await fetch(`https://zillow9ja.yamltech.com/media/upload`, {
@@ -247,8 +244,8 @@ export default function Page() {
         <div className='mt-8 px-5'>
           {/* <h2 className="text-xl font-medium mb-6">{'My Profile'}</h2> */}
           <div className='flex gap-5 flex-col md:w-[50%] mr-auto md:ml-[2rem] pt-6'>
-            <div className='relative w-[100px] h-[100px] rounded-full bg-green-300'>
-            <img src={user?.profile_pic?.media || './images/user1.png'} alt="User profile" className='w-[100px] h-[100px] rounded-full'/>              <div className='absolute bottom-0 right-0 text-[20px] bg-gray-300 p-1 rounded-full'>
+            <div className='relative w-[100px] h-[100px] rounded-full'>
+            <img src={user?.profile_pic?.media || './images/man.png'} alt="User profile" className='w-[100px] h-[100px] rounded-full'/>              <div className='absolute bottom-0 right-0 text-[20px] bg-gray-300 p-1 rounded-full'>
                 <BiCamera onClick={() => setImagePreviewModal(true)}/>
               </div>
             </div>
