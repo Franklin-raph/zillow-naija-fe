@@ -88,7 +88,7 @@ export default function Page() {
   }
 
   async function handleFileUpload(file: File, view?: string) {
-    console.log("Upload Profile Image ..... ");
+    console.log("Upload Profile Image ..... ", view);
     
     const maxSizeInBytes = 5 * 1024 * 1024; // 5MB in bytes
     if(file.size > maxSizeInBytes){
@@ -106,7 +106,7 @@ export default function Page() {
     
     
     try {
-      const res = await fetch(`https://zillow9ja.yamltech.com/media/upload`, {
+      const res = await fetch(`https://zillow9ja.yamltech.com/media`, {
         method: "POST",
         body: formData,
         headers : {
@@ -130,8 +130,9 @@ export default function Page() {
       } else {
         setMsg("File upload wasn't successful");
         setAlertType('error');
+        location.reload();
       }
-
+      
       if(res.ok === true && view === "back_view") {
         const response = await put('/dashboard/update-profile', {
           back_view: data.data.id,
@@ -147,9 +148,10 @@ export default function Page() {
       }
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
-          setMsg(error.response?.data?.message || 'Error uploading file');
+        setMsg(error.response?.data?.message || 'Error uploading file');
       } else {
-          setMsg('An unexpected error occurred.');
+        setMsg('An unexpected error occurred.');
+        location.reload();
       }
       setFileUploadLoader(false);
       setAlertType('error');

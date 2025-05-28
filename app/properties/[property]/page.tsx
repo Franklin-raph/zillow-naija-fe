@@ -15,10 +15,12 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import RecentlyPostedHomeCards from "../../components/recently-posted-homes-card/RecentlyPostedHomeCards";
 import Footer from '@/app/components/footer/Footer';
 import { BiHeart, BiShare } from 'react-icons/bi';
-import { get, post } from '@/app/utils/axiosHelpers';
+import { get, post, remove } from '@/app/utils/axiosHelpers';
 import { useParams } from 'next/navigation';
 import Alert from '@/app/components/alert/Alert';
 import { AxiosError } from 'axios';
+import { BsFillHeartFill } from 'react-icons/bs';
+import Map from '@/app/components/map/Map';
 
 // Define the property info type
 interface MediaItem {
@@ -45,6 +47,10 @@ interface PropertyInfo {
     media?: MediaItem[];
     user?: User;
     phone?: string;
+    added_to_favourite?: boolean;
+    location?: {
+        coordinates: [number, number];
+    };
 }
 
 export default function Page() {
@@ -87,16 +93,36 @@ export default function Page() {
         getPropertyInfo();
     }, [property])
 
-    const toggleFavorite = async () => {
+    const addFavorite = async () => {
         if (!propertyInfo?.id) return;
-        
-        console.log({"listing": propertyInfo.id});
         
         try {
             setIsLoading(true);
             await post(`/favorites/`, {"listing": propertyInfo.id});
             await getPropertyInfo(); // Refresh property info
             setMsg('Property added to favorites');
+            setAlertType('success');
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                setMsg(error.response?.data?.message || 'An error occurred');
+                setAlertType('warning');
+            } else {
+                setMsg('An unexpected error occurred.');
+                setAlertType('error');
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const removeFavorite = async () => {
+        if (!propertyInfo?.id) return;
+        
+        try {
+            setIsLoading(true);
+            await remove(`/favorites/${propertyInfo.id}/`);
+            await getPropertyInfo(); // Refresh property info
+            setMsg('Property removed from favorites');
             setAlertType('success');
         } catch (error: unknown) {
             if (error instanceof AxiosError) {
@@ -161,13 +187,18 @@ export default function Page() {
                         alt={propertyInfo?.name || 'Property image'} 
                     />
                     <div className='absolute top-4 right-6 flex items-center gap-2'>
-                        <div onClick={toggleFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white py-2 px-3 rounded-full hover:bg-gray-100 transition-colors'>
-                            <BiHeart className='text-[12px]'/>
-                            <p className='text-[10px]'>Save</p>
-                        </div>
-                        <div className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white py-2 px-3 rounded-full hover:bg-gray-100 transition-colors'>
-                            <BiShare className='text-[12px]'/>
-                            <p className='text-[10px]'>Share</p>
+                        {
+                            propertyInfo?.added_to_favourite ?
+                            <div onClick={removeFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
+                                <BsFillHeartFill className='text-[16px]'/>
+                            </div>
+                            :
+                            <div onClick={addFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
+                                <BiHeart className='text-[16px]'/>
+                            </div>
+                        }
+                        <div className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
+                            <BiShare className='text-[16px]'/>
                         </div>
                     </div>
                     {propertyInfo?.media && propertyInfo.media.length > 0 && (
@@ -239,19 +270,7 @@ export default function Page() {
                     </div>
                     
                     <div className='md:mt-8'>
-                        {propertyInfo?.user?.profile_pic?.media ? (
-                            <img 
-                                src={propertyInfo.user.profile_pic.media} 
-                                alt="Agent location map" 
-                                className='w-full rounded-lg'
-                            />
-                        ) : (
-                            <img 
-                                src="/images/map.png" 
-                                alt="Property location map" 
-                                className='w-full rounded-lg'
-                            />
-                        )}
+                        <Map address={propertyInfo?.address} location={propertyInfo?.location?.coordinates}/>
                     </div>
                 </div>
                 

@@ -6,6 +6,7 @@ import { BiMenu } from 'react-icons/bi'
 import { IoCloseOutline } from 'react-icons/io5'
 import { MdMail } from 'react-icons/md'
 import Cookies from 'js-cookie';
+import { CiUser } from 'react-icons/ci'
 
 export default function Navbar() {
 
@@ -64,7 +65,14 @@ export default function Navbar() {
                                 </li>
                             ))
                         }
-                    <Link className='hover:bg-[#22AC00] transition-all ml-[1rem] mt-3 border py-[10px] px-7 text-white' href="/login">Sign In</Link>
+                        {
+                            token ?
+                            <Link className='bg-gray-100 rounded-full p-[6px] text-[20px] text-[#2E8B57] ml-5' href="/dashboard">
+                                <CiUser />
+                            </Link>
+                            :
+                            <Link className='hover:bg-[#22AC00] transition-all ml-[1rem] mt-3 border py-[10px] px-7 text-white' href="/login">Sign In</Link>
+                        }
                     </ul>
                 </div>
             }
@@ -78,7 +86,9 @@ export default function Navbar() {
                 <div className='hidden sm:flex items-center gap-5'>
                     <MdMail />
                     <Link href="">Advertise</Link>
-                    <Link className='bg-[#2E8B57] rounded-[4px] px-[10px] py-[2px] text-white' href="/dashboard">Dashboard</Link>
+                    <Link className='bg-gray-100 rounded-full p-[6px] text-[20px] text-[#2E8B57]' href="/dashboard">
+                        <CiUser />
+                    </Link>
                 </div>
                 :
                 <Link className='bg-[#2E8B57] rounded-[4px] px-[16px] py-[5px] text-white hidden sm:block' href="/login">Sign In.</Link>

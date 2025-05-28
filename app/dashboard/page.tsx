@@ -1,19 +1,120 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideNav from '../components/side-nav/SideNav'
 import TopNav from '../components/top-nav/TopNav'
 import { LuHouse } from 'react-icons/lu';
 import { BsHouseCheck } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
+import { get } from '../utils/axiosHelpers';
+
+interface UserData {
+  id: string;
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  bio?: string;
+  address?: string;
+  sex?: string;
+  // Add other user properties as needed
+}
+
+interface RecentActivity {
+  id: string;
+  activity_type: string;
+  description: string;
+  created_at: string;
+}
+
+
 
 
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
   const percentageSold = 75; // Example percentage for sold properties
+
+  const [bioData, setBioData] = useState({
+      bio: '',
+      full_name:'',
+      address:'',
+      sex: ''
+  })
+
+  const [recentActivities, setRecentActivities] = useState<RecentActivity[]>([])
   
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
+  }
+
+  useEffect(() => {
+    getUserProfile()
+    getRecentActivities()
+  }, [])
+
+  async function getUserProfile() {
+    try {
+      const storedUser = localStorage.getItem('user')
+      
+      if (!storedUser) {
+        console.error('No user found in localStorage')
+        return
+      }
+      
+      // Parse the stored user JSON string to an object
+      const currentUser: UserData = JSON.parse(storedUser)
+      
+      if (!currentUser.id) {
+        console.error('User ID not found')
+        return
+      }
+      
+      const response = await get(`/profile/user/${currentUser.id}`)
+      console.log(response);
+      
+      if (!response.success) {
+        throw new Error('Failed to fetch user profile')
+      }
+      
+      setBioData({
+        bio: response?.data?.bio || '',
+        full_name: response?.data?.full_name || '',
+        address: response?.data?.address || '',
+        sex: response?.data?.sex || ''
+      })
+      
+    } catch (error) {
+      console.error('Error fetching user profile:', error)
+    }
+  }
+
+  const getRecentActivities = async () => {
+    try {
+      const storedUser = localStorage.getItem('user')
+      
+      if (!storedUser) {
+        console.error('No user found in localStorage')
+        return
+      }
+      
+      // Parse the stored user JSON string to an object
+      const currentUser: UserData = JSON.parse(storedUser)
+      
+      if (!currentUser.id) {
+        console.error('User ID not found')
+        return
+      }
+
+      const response = await get(`/recent-activities`)
+      if (response.success) {
+        setRecentActivities(response.data)
+      } else {
+        console.error('Failed to fetch recent activities:', response.message)
+      }
+      console.log(response);
+      
+    } catch (error) {
+      console.error('Error fetching recent activities:', error)
+    }
   }
 
   return (
@@ -28,7 +129,7 @@ export default function Page() {
             toggleNav: toggleNav,
             setToggleNav: handleToggleNav
           }}
-          pageTitle={`Hi, "Guest"}`}
+          pageTitle={`Hi, ${bioData?.full_name || 'Guest'}`}
         />
         <div className='mt-8'>
           <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[40px]">
@@ -57,13 +158,23 @@ export default function Page() {
             <p className=' font-[700] text-[20px]'>Recent Activities</p>
             <div className='mt-[0.5rem]'>
               {
-                [1,2,3,4]?.map((item, index) => (
-                  <div key={index} className='flex items-center justify-between text-[#4B4B4E] border-b pt-5 pb-2'>
-                      <p>{item}. Logged in</p>
-                      <p>{new Date().toDateString()}</p>
-                  </div>
-                ))
+                recentActivities.length > 0 ? (
+                  recentActivities.map((activity, index) => (
+                    <div key={index} className='flex items-center justify-between text-[#4B4B4E] border-b pt-5 pb-2'>
+                      <p className='capitalize'>{activity.activity_type}: {activity.description}</p>
+                      <p>{new Date(activity.created_at).toDateString()}</p>
+                    </div>
+                  )).slice(0, 5) // Display only the last 5 activities
+                ) : (
+                  <p className='text-gray-500'>No recent activities found.</p>
+                )
               }
+                {/* // [1,2,3,4]?.map((item, index) => (
+                //   <div key={index} className='flex items-center justify-between text-[#4B4B4E] border-b pt-5 pb-2'>
+                //       <p>{item}. Logged in</p>
+                //       <p>{new Date().toDateString()}</p>
+                //   </div>
+                // )) */}
             </div>
           </div>
           <div className='w-[100%] lg:w-[40%] flex flex-col gap-5'>

@@ -193,6 +193,11 @@ export default function Page() {
   }
 
   async function updateBio(){
+    if(!bioData.full_name || !bioData.address || !bioData.sex){
+      setMsg('Please fill in full name, address and gender.');
+      setAlertType('error');
+      return
+    }
     try {
       setLoading(true)
       console.log("Update Bio");
