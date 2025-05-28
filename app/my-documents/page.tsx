@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { get, put } from '../utils/axiosHelpers';
 import { AxiosError } from 'axios'
 import Alert from '../components/alert/Alert';
-import { BiPencil, BiTrash } from 'react-icons/bi';
+import { BiTrash } from 'react-icons/bi';
 
 interface UserData {
   id: string;
