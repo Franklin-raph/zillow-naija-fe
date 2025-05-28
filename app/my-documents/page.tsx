@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { get, put } from '../utils/axiosHelpers';
 import { AxiosError } from 'axios'
 import Alert from '../components/alert/Alert';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 
 interface UserData {
   id: string;
@@ -102,11 +103,8 @@ export default function Page() {
     formData.append('media', file);
     formData.append('media_type', 'photo');
 
-    console.log(`Bearer ${token}`);
-    
-    
     try {
-      const res = await fetch(`https://zillow9ja.yamltech.com/media`, {
+      const res = await fetch(`https://zillow9ja.yamltech.com/upload`, {
         method: "POST",
         body: formData,
         headers : {
@@ -122,30 +120,35 @@ export default function Page() {
         const response = await put('/dashboard/update-profile', {
           front_view: data.data.id,
         });
+
         if(response.success){
-          getUserProfile();
           setMsg("File uploaded successfully");
           setAlertType('success');
+          getUserProfile();
+          return;
+        }else{
+          setMsg("File upload wasn't successful");
+          setAlertType('error');
+          location.reload();
+          return;
         }
-      } else {
-        setMsg("File upload wasn't successful");
-        setAlertType('error');
-        location.reload();
-      }
-      
-      if(res.ok === true && view === "back_view") {
+      } else if(res.ok === true && view === "back_view") {
         const response = await put('/dashboard/update-profile', {
           back_view: data.data.id,
         });
         if(response.success){
-          getUserProfile();
           setMsg("File uploaded successfully");
           setAlertType('success');
+          getUserProfile();
+          return
+        } else {
+          setMsg("File upload wasn't successful");
+          setAlertType('error');
+          location.reload();
+          return;
         }
-      } else {
-        setMsg("File upload wasn't successful");
-        setAlertType('error');
       }
+
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         setMsg(error.response?.data?.message || 'Error uploading file');
@@ -245,7 +248,7 @@ export default function Page() {
                   </p>
                   <div className='flex gap-2 text-[18px]'>
                       <BsEye className='cursor-pointer' onClick={() => previewDoc('front')}/>
-                      {/* <BiPencil className='cursor-pointer text-gray-600'/> */}
+                      <BiTrash className='cursor-pointer text-red-600'/>
                   </div>
                 </div>
                 <div className='flex items-center justify-between gap-2 mt-3 border-b pb-3'>
@@ -260,17 +263,9 @@ export default function Page() {
                   </p>
                   <div className='flex gap-2 text-[18px]'>
                       <BsEye className='cursor-pointer' onClick={() => previewDoc('back')}/>
-                      {/* <BiPencil className='cursor-pointer text-gray-600'/> */}
+                      <BiTrash className='cursor-pointer text-red-600'/>
                   </div>
                 </div>
-                {/* {
-                    [1,1,1,1,1].map((item, index) => (
-                        <div key={index} className='flex items-center justify-between gap-2 mt-3 border-b pb-3'>
-                            <p className='text-[#475367]'>Document 1</p>
-                            <p className='text-[#98A2B3]'>2022-12-31</p>
-                        </div>
-                    ))
-                } */}
             </div>
           </section>
           {

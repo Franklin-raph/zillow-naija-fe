@@ -158,7 +158,7 @@ export default function Page() {
     formData.append('media_type', 'photo');
     
     try {
-      const res = await fetch(`https://zillow9ja.yamltech.com/media/upload`, {
+      const res = await fetch(`https://zillow9ja.yamltech.com/upload`, {
         method: "POST",
         body: formData,
         headers : {

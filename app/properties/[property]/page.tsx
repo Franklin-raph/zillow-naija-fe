@@ -21,6 +21,7 @@ import Alert from '@/app/components/alert/Alert';
 import { AxiosError } from 'axios';
 import { BsFillHeartFill } from 'react-icons/bs';
 import Map from '@/app/components/map/Map';
+import Cookies from 'js-cookie';
 
 // Define the property info type
 interface MediaItem {
@@ -62,6 +63,7 @@ export default function Page() {
     const { property } = useParams()
     const [msg, setMsg] = useState<string>('')
     const [alertType, setAlertType] = useState<string>('')
+    const token = Cookies.get('token');
 
     async function getListings() {
         try {
@@ -188,14 +190,19 @@ export default function Page() {
                     />
                     <div className='absolute top-4 right-6 flex items-center gap-2'>
                         {
-                            propertyInfo?.added_to_favourite ?
-                            <div onClick={removeFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
-                                <BsFillHeartFill className='text-[16px]'/>
-                            </div>
-                            :
-                            <div onClick={addFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
-                                <BiHeart className='text-[16px]'/>
-                            </div>
+                            token &&
+                            <>
+                                {
+                                    propertyInfo?.added_to_favourite ?
+                                    <div onClick={removeFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
+                                        <BsFillHeartFill className='text-[16px]'/>
+                                    </div>
+                                    :
+                                    <div onClick={addFavorite} className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
+                                        <BiHeart className='text-[16px]'/>
+                                    </div>
+                                }
+                            </>
                         }
                         <div className='flex flex-col items-center justify-center cursor-pointer text-[#2E8B57] bg-white p-3 rounded-full hover:bg-gray-100 transition-colors'>
                             <BiShare className='text-[16px]'/>
