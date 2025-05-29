@@ -38,7 +38,6 @@ type SummaryProps = {
 
 export default function Page() {
   const [toggleNav, setToggleNav] = useState<boolean>(false)
-  const percentageSold = 75; // Example percentage for sold properties
 
   const [bioData, setBioData] = useState({
       bio: '',
