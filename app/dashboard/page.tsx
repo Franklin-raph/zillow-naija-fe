@@ -26,6 +26,13 @@ interface RecentActivity {
   created_at: string;
 }
 
+type SummaryProps = {
+  total_listings: number;
+  total_active_listings: number;
+  total_leased_listings: number;
+  total_sold_listings: number;
+}
+
 
 
 
@@ -41,15 +48,35 @@ export default function Page() {
   })
 
   const [recentActivities, setRecentActivities] = useState<RecentActivity[]>([])
+  const [summaryData, setSummaryData] = useState<SummaryProps | null>(null)
+  const [percentage, setPercentage] = useState<number>(0)
   
   const handleToggleNav = (value: boolean) => {
     setToggleNav(value)
   }
 
   useEffect(() => {
+    getSummary()
     getUserProfile()
     getRecentActivities()
   }, [])
+
+  const getSummary = async () => {
+    try {
+      const res = await get('/agent-dashboard/my-summary/')
+      setSummaryData(res.data)
+      setPercentage(
+        res.data?.total_sold_listings && res.data?.total_listings
+          ? parseFloat(
+              ((res.data.total_sold_listings / res.data.total_listings) * 100).toFixed(2)
+            )
+          : 0
+      );      
+      console.log(res.data?.total_sold_listings / res.data?.total_listings * 100);
+    } catch (error) {
+      console.log('Error fetching summary:', error);
+    }
+  }
 
   async function getUserProfile() {
     try {
@@ -134,21 +161,26 @@ export default function Page() {
         <div className='mt-8'>
           <section className="w-[95%] mx-auto md:px-[1rem] px-[0px] pb-[40px]">
             <p className="font-[#212121] font-[700] md:text-[25px] text-[18px] mb-3">Dashboard</p>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border-b pb-5'>
+            <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 border-b pb-5'>
               <div className='bg-[#F9F9F9] p-5 rounded-[10px] border border-[#2E8B57]'>
                 <LuHouse className='text-[30px] text-[#2E8B57]'/>
                 <p className='text-[18px] text-[#212121] mb-2 mt-1'>Total Listed Properties</p>
-                <p className='text-[18px] text-[#212121] font-[500]'>123</p>
+                <p className='text-[18px] text-[#212121] font-[500]'>{summaryData?.total_listings}</p>
               </div>
               <div className='bg-[#F9F9F9] p-5 rounded-[10px] border border-[#2E8B57]'>
                 <BsHouseCheck className='text-[30px] text-[#2E8B57]'/>
                 <p className='text-[18px] text-[#212121] mb-2 mt-1'>Active Listings</p>
-                <p className='text-[18px] text-[#212121] font-[500]'>123</p>
+                <p className='text-[18px] text-[#212121] font-[500]'>{summaryData?.total_active_listings}</p>
               </div>
               <div className='bg-[#F9F9F9] p-5 rounded-[10px] border border-[#2E8B57]'>
                 <GiMoneyStack className='text-[30px] text-[#2E8B57]'/>
                 <p className='text-[18px] text-[#212121] mb-2 mt-1'>Total Properties Sold</p>
-                <p className='text-[18px] text-[#212121] font-[500]'>123</p>
+                <p className='text-[18px] text-[#212121] font-[500]'>{summaryData?.total_sold_listings}</p>
+              </div>
+              <div className='bg-[#F9F9F9] p-5 rounded-[10px] border border-[#2E8B57]'>
+                <GiMoneyStack className='text-[30px] text-[#2E8B57]'/>
+                <p className='text-[18px] text-[#212121] mb-2 mt-1'>Total Leased Properties</p>
+                <p className='text-[18px] text-[#212121] font-[500]'>{summaryData?.total_leased_listings}</p>
               </div>
             </div>
           </section>
@@ -190,8 +222,8 @@ export default function Page() {
                   <div 
                     className="absolute top-0 left-0 w-full h-full rounded-full bg-green-600" 
                     style={{ 
-                      clipPath: `polygon(50% 50%, 0 0, ${percentageSold <= 50 ? percentageSold * 2 : 100}% 0, ${
-                        percentageSold <= 50 ? '50% 50%' : `100% ${(percentageSold - 50) * 2}%, 50% 50%`
+                      clipPath: `polygon(50% 50%, 0 0, ${percentage <= 50 ? percentage * 2 : 100}% 0, ${
+                        percentage <= 50 ? '50% 50%' : `100% ${(percentage - 50) * 2}%, 50% 50%`
                       })` 
                     }}>
 
@@ -199,7 +231,7 @@ export default function Page() {
                   
                   {/* White inner circle to create donut effect */}
                   <div className="absolute top-[23px] left-[23px] w-[75%] h-[75%] mx-auto rounded-full bg-white flex items-center justify-center">
-                    <span className="text-3xl font-bold">{percentageSold}%</span>
+                    <span className="text-3xl font-bold">{percentage}%</span>
                   </div>
                 </div>
                 
