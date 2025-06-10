@@ -184,6 +184,15 @@ export default function Home() {
                 />
               </div>
             </SwiperSlide>
+            <SwiperSlide>
+              <div className="w-full h-full flex items-center justify-center">
+                <img 
+                  src="./images/mockup-3.svg" 
+                  alt="Property" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </SwiperSlide>
           </Swiper>
         </div>
       </section>
